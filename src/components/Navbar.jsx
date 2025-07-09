@@ -6,8 +6,8 @@ import Carasole from "./Carasole";
 const Navbar = () => {
   return (
     <div className="">
-      <div className=" shadow-xl w-full ">
-        <ul className=" hidden md:flex justify-center gap-10 mt-3 py-3 items-center sticky ">
+      <div className=" shadow-xl w-full  ">
+        <ul className=" hidden md:flex justify-center gap-10 mt-3 py-3 items-center  ">
           <li>
             <Link
               to="/home"
