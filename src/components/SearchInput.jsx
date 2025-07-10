@@ -1,9 +1,10 @@
 import React from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 
-const SearchInput = () => {
+const SearchInput = ({search}) => {
+     if (!search) return null;
   return (
-    <div className="h-[100px] relative flex flex-col items-center justify-center">
+    <div className="h-[100px] relative  flex-col items-center justify-center">
       <div className="relative w-full md:w-[700px]">
         <input
           type="text"
