@@ -55,12 +55,12 @@ const ProductList = () => {
             key={products.id}
             className=" mb-5 bg-white bg-opacity-30 backdrop-blur-md shadow-xl p-6 rounded-lg transition transform duration-300 hover:translate-y-3 hover:scale-105"
           >
-            <div className="w-[250px] ms-4  mb-4 mt-5 cursor-pointer ">
+            <div className="w-[200px] ms-4  mb-4 mt-5 cursor-pointer ">
               <img
                 src={
                   products.images && Array.isArray(products.images)
                     ? products.images[0]
-                    : img1
+                    : products.image || img1
                 }
                 alt={products.title}
                 onError={(e) => {
@@ -71,7 +71,7 @@ const ProductList = () => {
                 className=""
               />
               <h4 className="font-bold mb-3 text-center">{products.title}</h4>
-              <p className="text-justify">{products.description}</p>
+              <p className="text-justify text-[15px]">{products.description}</p>
               <h4 className="mt-5 text-[#f57224] font-bold">
                 Rs.{products.price}
               </h4>
