@@ -35,7 +35,7 @@ const Navbar = () => {
             </div>  
             {/* Dropdown Category */}
             {isOpen && (
-              <ul className="absolute top-full left-0 w-40 bg-white p-2 rounded-b-sm shadow-md z-50">
+              <ul className="absolute top-full left-0 w-40 bg-white p-2 rounded-b-sm shadow-md z-30">
                 <li className="mb-2 hover:bg-gray-100 px-2 py-1 rounded cursor-pointer">
                   Mens
                 </li>
