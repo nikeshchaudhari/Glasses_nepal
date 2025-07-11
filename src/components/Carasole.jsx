@@ -1,44 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import img1 from "../assets/1.jpg";
 import img2 from "../assets/2.jpg";
-import axios from "axios";
+import { useState } from "react";
+
+const api = [
+  { id: 0, image: img1 },
+  { id: 1, image: img2 },
+];
+
 const Carasole = () => {
-  // const [image, setImage] = useState([]);
+  const [isCurrent, setIsCurrent] = useState(0);
 
-  // useEffect(() => {
-  //   const Img = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         "https://pixabay.com/api/");
-  //       console.log(res);
+  const left = () => {
+    setIsCurrent(isCurrent === 0 ? api.length - 1 : isCurrent - 1);
+  };
 
-  //       setImage(res.data.image);
-  //     } catch (err) {
-  //       console.log("Something wrong..");
-  //     }
-  //   };
-  //   Img();
-  // }, []);
+  const right = () => {
+    setIsCurrent(isCurrent === api.length - 1 ? 0 : isCurrent + 1);
+  };
 
   return (
-    <>
-    {/* {image.map((item)=>((
-      <div key={item.key}>
-       <img src={item.image} alt="" />  
-      </div>
-    )))} */}
-    <div>
-<img src={img1} alt="" srcset="" />
+    <div className="relative w-full h-[300px] overflow-hidden flex items-center justify-center">
+      {/* Carousel image */}
+      <img
+        src={api[isCurrent].image}
+        alt={`Image ${isCurrent}`}
+        className="w-full h-full object-cover transition-transform duration-700"
+      />
 
+      {/* Left Button */}
+      <button
+        onClick={left}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"
+      >
+        ◀
+      </button>
 
+      {/* Right Button */}
+      <button
+        onClick={right}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"
+      >
+        ▶
+      </button>
     </div>
-
-    </>
   );
 };
 
