@@ -7,8 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="">
-      <div className="shadow-xl w-full">
+      <div className="shadow w-full flex justify-end items-center md:justify-center">
         <ul className="hidden md:flex justify-center gap-10 mt-3 py-3 items-center">
           <li>
             <Link to="/home" className="hover:font-bold transition-all">
@@ -33,7 +32,7 @@ const Navbar = () => {
               ) : (
                 <MdKeyboardArrowDown className="inline ml-1" />
               )}
-            </div>
+            </div>  
             {/* Dropdown Category */}
             {isOpen && (
               <ul className="absolute top-full left-0 w-40 bg-white p-2 rounded-b-sm shadow-md z-50">
@@ -59,8 +58,8 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-      </div>
-    </div>
+</div>       
+
   );
 };
 
