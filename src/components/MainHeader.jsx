@@ -73,23 +73,31 @@ const MainHeader = () => {
                 </li>
                 <li className="">
                   <div>
-                    <button onClick={()=> setArrow(!arrow)} className=" flex justify-between w-[70vw] text-2xl ms-10" >
+                    <button
+                      onClick={() => setArrow(!arrow)}
+                      className=" flex justify-between w-[70vw] text-2xl ms-10"
+                    >
                       Categories
                       <div>
-                        {arrow ? <MdKeyboardArrowDown/>:<IoIosArrowForward/>}
+                        {arrow ? (
+                          <MdKeyboardArrowDown />
+                        ) : (
+                          <IoIosArrowForward />
+                        )}
                       </div>
-                      
                     </button>
-                    {
-                      arrow &&(
-                        <ul className="w-full flex flex-col text-2xl ms-15 gap-3 p-5">
-                          <li>Home</li>
-                          <li>Product</li>
-                          <li>Home</li>
-                          <li>Home</li>
-                        </ul>
-                      )
-                    }
+                    {arrow && (
+                      <ul className="w-full flex flex-col text-2xl ms-15 gap-3 p-5">
+                        <li className="transform hover:translate-x-5">Men</li>
+                        <li className="transform hover:translate-x-5">Women</li>
+                        <li className="transform hover:translate-x-5">
+                          SunGlasses
+                        </li>
+                        <li className="transform hover:translate-x-5">
+                          Sportglasses
+                        </li>
+                      </ul>
+                    )}
                   </div>
                 </li>
                 <li>
