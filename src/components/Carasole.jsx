@@ -19,31 +19,13 @@ const Carasole = () => {
   };
 
   return (
-    <div className="relative w-full h-[300px] overflow-hidden flex items-center justify-center">
-      {/* Carousel image */}
-      <img
-        src={api[isCurrent].image}
-        alt={`Image ${isCurrent}`}
-        className="w-full h-full object-cover transition-transform duration-700"
-      />
 
-      {/* Left Button */}
-      <button
-        onClick={left}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"
-      >
-        ◀
-      </button>
-
-      {/* Right Button */}
-      <button
-        onClick={right}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow"
-      >
-        ▶
-      </button>
-    </div>
-  );
+    <>
+    
+    
+    </>
+  )
+    
 };
 
 export default Carasole;
