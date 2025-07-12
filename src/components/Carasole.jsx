@@ -17,8 +17,6 @@ const Carasole = () => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    
-
     setData(api);
   }, []);
   const next = () => {
@@ -28,8 +26,12 @@ const Carasole = () => {
     setCurrent(current === 0 ? data.length - 1 : current - 1);
   };
   return (
-    <div className="flex justify-evenly items-center ">
-      <div className="left-arrow absolute z-40 left-0 transition ease-linear duration-500" onClick={next}>
+    <div className="flex justify-evenly items-center overflow-hidden  "
+    >
+      <div
+        className="left-arrow absolute z-40 left-0 "
+        onClick={prev}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -47,13 +49,17 @@ const Carasole = () => {
         {data.map(
           (item, index) =>
             current === index && (
-              <div key={item.index}>
-                <img src={item.image} alt="image" className="transition-opacity duration-1000 ease-in-out" />
+              <div key={index} className="flex-shrink-0 w-full mt-1">
+                <img
+                  src={item.image}
+                  alt="image"
+                 className="w-full"
+                />
               </div>
             )
         )}
       </div>
-      <div className="right-arrow absolute right-0 " onClick={prev}>
+      <div className="right-arrow absolute right-0 " onClick={next}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
