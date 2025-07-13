@@ -21,24 +21,27 @@ const image = [
 
 const ShopCategories = () => {
   return (
-    <div className="bg-[#e8e8e8] min-h-screen">
+    <div className="bg-[#e8e8e8] min-h-screen ">
+    
+
       <h1 className="text-center p-10 text-[30px] font-bold">
         SHOP BY CATEGORY
       </h1>
-      <div className="flex flex-wrap  justify-center gap-1 ">
+      <div className="w-full grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4  ">
         {image.map((items, index) => (
           <div
             key={index}
-            className="w-full sm:w-1/2 lg:w-1/4 "
+            className="bg-slate-950 rounded-2xl"
           >
             <img
               src={items.image}
               alt={items.id}
-              className="bg-slate-400 opacity-60 rounded-2xl w-[300px] h-[300px] hover:opacity-100 transition duration-700 cursor-pointer object-cover"
+              className="bg-slate-400 opacity-60 rounded-2xl w-full h-[300px] hover:opacity-100 transition duration-700 cursor-pointer object-cover"
             />
           </div>
         ))}
       </div>
+
     </div>
   );
 };
