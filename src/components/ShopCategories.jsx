@@ -36,7 +36,7 @@ const ShopCategories = () => {
             <img
               src={items.image}
               alt={items.id}
-              className="bg-slate-400 opacity-60 rounded-2xl w-full h-[300px] hover:opacity-100 transition duration-700 cursor-pointer object-cover"
+              className="bg-slate-400 opacity-60 rounded-2xl w-full  h-[400px] hover:opacity-100 transition duration-700 cursor-pointer object-cover"
             />
           </div>
         ))}
