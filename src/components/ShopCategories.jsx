@@ -27,16 +27,16 @@ const ShopCategories = () => {
       <h1 className="text-center p-10 text-[30px] font-bold">
         SHOP BY CATEGORY
       </h1>
-      <div className="w-full grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4  ">
+      <div className="w-full grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 px-10od">
         {image.map((items, index) => (
           <div
             key={index}
-            className="bg-slate-950 rounded-2xl"
+            className="bg-slate-950 rounded-xl"
           >
             <img
               src={items.image}
               alt={items.id}
-              className="bg-slate-400 opacity-60 rounded-2xl w-full  h-[400px] hover:opacity-100 transition duration-700 cursor-pointer object-cover"
+              className="bg-slate-400 opacity-60 rounded-xl w-full  h-[400px] hover:opacity-100 transition duration-700 cursor-pointer object-cover"
             />
           </div>
         ))}
