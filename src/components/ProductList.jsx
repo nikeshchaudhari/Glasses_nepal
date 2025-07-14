@@ -18,16 +18,34 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 overflow-x-hidden">
-      <h3 className="flex justify-center mt-5 font-bold text-[24px] mb-5">
+    <div className="min-h-screen overflow-x-hidden">
+      <h3 className="flex justify-center mt-5 py-5 font-bold text-[24px] mb-5">
         ALL PRODUCTS
       </h3>
+      <div className="flex h-min-screen  px-10">
+        <div className="w-[400px] ">
+          <h5 className="mb-5">FILTER BY :</h5>
+        <hr className="mb-5"/>
+      <div>
+        <h5>Price</h5>
+        <div>
+          <h5>From</h5> 
+          <h5>To </h5>
+        </div>
+        <div className="flex w-5">
+          <input type="number" className="w-15"/>
+          <span className="">-</span>
+          <input type="number" name="" id="" className="w-15" />
+        </div>
+      </div>
+      
 
-      <div className="flex justify-center flex-wrap w-full px-4 bg-white p-4">
+        </div>
+      <div className="flex justify-center flex-wrap w-full px-4 bg-white p-4 mt-5">
         {items.map((item, index) => (
           <div
             key={index}
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-4"
+            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"
           >
             <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full trasnform hover:-translate-y-2 cursor-pointer transition duration-500">
               <div className="w-full h-[200px] overflow-hidden flex items-center justify-center ">
@@ -49,6 +67,7 @@ const ProductList = () => {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
