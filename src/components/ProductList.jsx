@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Sidebar from "./Sidebar";
 
 const ProductList = () => {
   const [items, setItems] = useState([]);
@@ -23,51 +24,40 @@ const ProductList = () => {
         ALL PRODUCTS
       </h3>
       <div className="flex h-min-screen  px-10">
-        <div className="w-[400px] ">
-          <h5 className="mb-5">FILTER BY :</h5>
-        <hr className="mb-5"/>
-      <div>
-        <h5>Price</h5>
-        <div>
-          <h5>From</h5> 
-          <h5>To </h5>
-        </div>
-        <div className="flex w-5">
-          <input type="number" className="w-15"/>
-          <span className="">-</span>
-          <input type="number" name="" id="" className="w-15" />
-        </div>
-      </div>
-      
-
-        </div>
-      <div className="flex justify-center flex-wrap w-full px-4 bg-white p-4 mt-5">
-        {items.map((item, index) => (
-          <div
-            key={index}
-            className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"
-          >
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full trasnform hover:-translate-y-2 cursor-pointer transition duration-500">
-              <div className="w-full h-[200px] overflow-hidden flex items-center justify-center ">
-                <img
-                  src={item.images && item.images.length>0 ? item.images[0]: ""}
-                  alt={item.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-center font-bold text-[16px] mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-justify text-sm text-gray-600">
-                  {item.description}
-                </p>
-                <p className="mt-4 font-bold text-[#f85606]">Rs.{item.price}</p>
+        <Sidebar />
+        <div className="flex justify-center flex-wrap w-full px-4 bg-white p-4 mt-5">
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"
+            >
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full trasnform hover:-translate-y-2 cursor-pointer transition duration-500">
+                <div className="w-full h-[200px] overflow-hidden flex items-center justify-center ">
+                  <img
+                    src={
+                      item.images && item.images.length > 0
+                        ? item.images[0]
+                        : ""
+                    }
+                    alt={item.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-center font-bold text-[16px] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-justify text-sm text-gray-600">
+                    {item.description}
+                  </p>
+                  <p className="mt-4 font-bold text-[#f85606]">
+                    Rs.{item.price}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
     </div>
   );
