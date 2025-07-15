@@ -37,10 +37,10 @@ const Navbar = () => {
             {isOpen && (
               <ul className="absolute top-full left-0 w-40 bg-white p-2 rounded-b-sm shadow-md z-30">
                 <li className="mb-2 hover:bg-gray-100 px-2 py-1 rounded cursor-pointer">
-                  Mens
+                  <Link to='/categories/men'>Mens</Link>
                 </li>
                 <li className="mb-2 hover:bg-gray-100 px-2 py-1 rounded cursor-pointer">
-                  Women
+                 <Link to='/categories/women'>Women</Link> 
                 </li>
                 <li className="mb-2 hover:bg-gray-100 px-2 py-1 rounded cursor-pointer">
                   Sunglasses
