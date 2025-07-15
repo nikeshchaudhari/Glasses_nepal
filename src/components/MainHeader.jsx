@@ -3,6 +3,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import { Link } from "react-router-dom";
+
 const MainHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -35,7 +37,7 @@ const MainHeader = () => {
           </div>
           <div className="mx-5">
             <ul >
-              <li className="mb-2">HOME</li>
+              <li className="mb-2"><Link to="/home">HOME</Link></li>
               <li className="mb-2">All Product</li>
               <li className="mb-2">Categories</li>
             </ul>
