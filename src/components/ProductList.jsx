@@ -29,7 +29,7 @@ const ProductList = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"
+              className="w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"
             >
               <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full trasnform hover:-translate-y-2 cursor-pointer transition duration-500">
                 <div className="w-full h-[200px] overflow-hidden flex items-center justify-center ">
