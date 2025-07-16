@@ -32,10 +32,12 @@ const MainHeader = () => {
           <>
             <div onClick={() => setIsOpen(false)} className="bg-black"></div>
             {/* Drawer */}
+            
             <div
               // onClick={() => setIsOpen(false)}
               className="fixed top-0 right-0 w-[300px] h-full  bg-white shadow-lg z-40 transform transition duration-1000  animate-slide"
             >
+
               <div className="w-full flex justify-end px-5 pt-5">
                 <CloseOutlinedIcon
                   onClick={() => setIsOpen(false)}
@@ -62,17 +64,18 @@ const MainHeader = () => {
                     {isArrow && (
                       <div className="mx-5 mt-2">
                         <ul>
-                          <li className="mb-1">Mens</li>
-                          <li className="mb-1">Womens</li>
-                          <li className="mb-1">Sunglasses</li>
-                          <li className="mb-1">Sport Glasses</li>
+                          <li className="mb-1 text-[15px]">Mens</li>
+                          <li className="mb-1 text-[15px]">Womens</li>
+                          <li className="mb-1 text-[15px]">Sunglasses</li>
+                          <li className="mb-1 text-[15px]">Sport Glasses</li>
                         </ul>
                       </div>
                     )}
                   </li>
                 </ul>
               </div>
-            </div>
+              </div>
+          
           </>
         )}
       </div>
