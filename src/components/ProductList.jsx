@@ -47,9 +47,9 @@ const ProductList = () => {
                   <h3 className="text-center font-bold text-[16px] mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-justify text-sm text-gray-600">
+                  {/* <p className="text-justify text-sm text-gray-600">
                     {item.description}
-                  </p>
+                  </p> */}
                   <p className="mt-4 font-bold text-[#f85606]">
                     Rs.{item.price}
                   </p>
