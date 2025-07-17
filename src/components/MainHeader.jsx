@@ -61,6 +61,7 @@ const MainHeader = () => {
                   </li>
                   <li className="mb-2" onClick={() => setIsArrow(true)}>
                     Categories
+                    
                     {isArrow && (
                       <div className="mx-5 mt-2">
                         <ul>
