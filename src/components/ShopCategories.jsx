@@ -42,12 +42,12 @@ const ShopCategories = () => {
           <div key={index} className=" rounded-xl">
             <Link to={items.link}>
             <div className="relative  w-full h-[150px] lg:w-[300px]">
-              <h2 className=" hidden lg:block absolute lg:top-40 lg:left-25 lg:bg-black bg-black lg:p-2 lg:opacity-60 lg:rounded-br-4xl  top-16 text-[10px] lg:text-[20px] text-white font-extrabold ">{items.name}</h2>
+              <h2 className=" hidden lg:block absolute lg:top-40 lg:left-25 lg:bg-black bg-black lg:p-2 lg:opacity-60 lg:rounded-br-4xl  top-16 text-[10px] lg:text-[20px] text-white font-extrabold opacity-50 transition transform hover:translate-y-5 duration-1000">{items.name}</h2>
            
               <img
                 src={items.image}
                 alt={items.id}
-                className=" opacity-100 rounded-xl w-full h-[150px] lg:h-[400px] transform transition hover:transform-y-20  "
+                className=" opacity-100 rounded-xl w-full h-[150px] lg:h-[400px] transform transition  "
               />
                </div>
             </Link>
