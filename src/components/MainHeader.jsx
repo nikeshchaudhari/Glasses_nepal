@@ -3,6 +3,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
+import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import { Link } from "react-router-dom";
 
 const MainHeader = () => {
@@ -32,12 +34,11 @@ const MainHeader = () => {
           <>
             <div onClick={() => setIsOpen(false)} className="bg-black"></div>
             {/* Drawer */}
-            
+
             <div
               // onClick={() => setIsOpen(false)}
               className="fixed top-0 right-0 w-[300px] h-full  bg-white shadow-lg z-40 transform transition duration-1000  animate-slide"
             >
-
               <div className="w-full flex justify-end px-5 pt-5">
                 <CloseOutlinedIcon
                   onClick={() => setIsOpen(false)}
@@ -59,13 +60,24 @@ const MainHeader = () => {
                   <li className="mb-2">
                     <Link to="/product">All Product</Link>
                   </li>
-                  <li className="mb-2" onClick={() => setIsArrow(true)}>
-                    Categories
-                    
+                  <li
+                    className="mb-2 inline"
+                    onClick={() => setIsArrow(!isArrow)}
+                  >
+                    <div className="flex justify-between mb-2">
+                      Categories
+                      {isArrow ? (
+                       <ExpandMoreRoundedIcon />
+                      ) : (
+                        
+                         <ChevronRightRoundedIcon />
+                      )}
+                    </div>
+
                     {isArrow && (
-                      <div className="mx-5 mt-2">
+                      <div className="mx-5 mt-2 mb-2">
                         <ul>
-                          <li className="mb-1 text-[15px]">Mens</li>
+                          <li className="mb-1 text-[15px]"><Link to="/categories/men">Mens</Link></li>
                           <li className="mb-1 text-[15px]">Womens</li>
                           <li className="mb-1 text-[15px]">Sunglasses</li>
                           <li className="mb-1 text-[15px]">Sport Glasses</li>
@@ -73,10 +85,10 @@ const MainHeader = () => {
                       </div>
                     )}
                   </li>
+                  <li className="mb-2"><Link to="/about-us">About Us</Link></li>
                 </ul>
               </div>
-              </div>
-          
+            </div>
           </>
         )}
       </div>
