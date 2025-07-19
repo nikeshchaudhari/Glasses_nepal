@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import Navbar from "../components/Navbar"
+import MainHeader from "../components/MainHeader"
 const Mens = () => {
   const [men, setMen] = useState([]);
   useEffect(() => {
@@ -21,8 +22,10 @@ const Mens = () => {
   }, []);
   return (
     <>
+    <MainHeader/>
+    <Navbar/>
     <div>
-      <h3>Mens</h3>
+      <h3 className="text-center mt-10 text-[30px] font-extrabold">Mens</h3>
       <div>
         {men.length > 0 ?(
 men.map((item,index)=>(
