@@ -46,9 +46,10 @@ const ProductDetails = () => {
             //   localStorage.setItem("cart", JSON.stringify(cart));
             //   alert("Add to cart")
 
-            const cart = localStorage.getItem("cart") || []
+            const cart = JSON.parse(localStorage.getItem("cart")) || []
             cart.push(item);
             localStorage.setItem("cart",JSON.stringify(cart))
+            window.dispatchEvent(new Event("cart"))
             console.log("Add to cart");
             
             }}
