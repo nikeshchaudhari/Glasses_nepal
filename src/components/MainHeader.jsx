@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -10,6 +10,22 @@ import { Link } from "react-router-dom";
 const MainHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isArrow, setIsArrow] = useState(false);
+  const [cartCount,setCartCount]= useState(0)
+useEffect(()=>{
+  const cart = localStorage.getItem("cart")|| []
+  setCartCount(cart.length)
+
+  const handlecartUpdate = ()=>{
+    const updateCart = localStorage.getItem("cart")||[]
+    setCartCount(updateCart.length)
+  };
+
+  window.addEventListener("cartUpdate",handlecartUpdate)
+
+  return ()=>{
+    window.addEventListener("cart-update",handlecartUpdate)
+  }
+},[])
   return (
     <>
       <div className="flex justify-between items-center px-4  md:px-15 py-5 bg-white sticky z-50 top-0 transition animation-fade">
@@ -23,8 +39,13 @@ const MainHeader = () => {
             className="md:w-[250px] w-[150px] "
           />
         </div>
-        <div className="flex gap-5">
+        <div className="flex gap-5 relative">
           <LocalMallOutlinedIcon />
+          {cartCount > 0 && (
+            <span className="absolute">
+              {cartCount}
+            </span>
+          )}
           <div className="md:hidden block">
             <MenuOutlinedIcon onClick={() => setIsOpen(true)} />
           </div>
@@ -69,7 +90,6 @@ const MainHeader = () => {
                       {isArrow ? (
                        <ExpandMoreRoundedIcon />
                       ) : (
-                        
                          <ChevronRightRoundedIcon />
                       )}
                     </div>
