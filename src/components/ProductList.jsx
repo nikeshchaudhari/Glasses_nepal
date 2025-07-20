@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "./Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const [items, setItems] = useState([]);
   const [minPrice,setMinPrice]= useState("")
   const [maxPrice,setMaxPrice]= useState("")
-
+const navigate = useNavigate();
   useEffect(() => {
     const dataFetch = async () => {
       try {
@@ -39,6 +40,7 @@ const ProductList = () => {
                 <div
               key={index}
               className="w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"
+              onClick={()=>navigate(`/product/${item.id}`)}
             >
               <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full trasnform hover:-translate-y-2 cursor-pointer transition duration-500">
                 <div className="w-full h-[200px] overflow-hidden flex items-center justify-center ">
