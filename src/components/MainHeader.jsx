@@ -12,9 +12,9 @@ const MainHeader = () => {
   const [isArrow, setIsArrow] = useState(false);
   return (
     <>
-      <div className="flex justify-between items-center px-4  md:px-15 py-5 ">
+      <div className="flex justify-between items-center px-4  md:px-15 py-5 bg-white sticky z-50 top-0 transition animation-fade">
         <div>
-          <SearchIcon className="flex items-center" />
+          <SearchIcon className="flex items-center " />
         </div>
         <div>
           <img
@@ -37,7 +37,7 @@ const MainHeader = () => {
 
             <div
               // onClick={() => setIsOpen(false)}
-              className="fixed top-0 right-0 w-[300px] h-full  bg-white shadow-lg z-40 transform transition duration-1000  animate-slide"
+              className="fixed top-0 right-0 w-[300px] h-full  bg-white shadow-lg z-40 transform transition duration-1000"
             >
               <div className="w-full flex justify-end px-5 pt-5">
                 <CloseOutlinedIcon
