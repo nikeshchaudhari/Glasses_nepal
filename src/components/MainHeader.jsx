@@ -12,18 +12,18 @@ const MainHeader = () => {
   const [isArrow, setIsArrow] = useState(false);
   const [cartCount,setCartCount]= useState(0)
 useEffect(()=>{
-  const cart = localStorage.getItem("cart")|| []
+  const cart = JSON.parse(localStorage.getItem("cart"))|| []
   setCartCount(cart.length)
 
   const handlecartUpdate = ()=>{
-    const updateCart = localStorage.getItem("cart")||[]
+    const updateCart = JSON.parse(localStorage.getItem("cart"))||[]
     setCartCount(updateCart.length)
   };
 
-  window.addEventListener("cartUpdate",handlecartUpdate)
+  window.addEventListener("cart",handlecartUpdate)
 
   return ()=>{
-    window.addEventListener("cart-update",handlecartUpdate)
+    window.removeEventListener("cart",handlecartUpdate)
   }
 },[])
   return (
@@ -42,7 +42,7 @@ useEffect(()=>{
         <div className="flex gap-5 relative">
           <LocalMallOutlinedIcon />
           {cartCount > 0 && (
-            <span className="absolute">
+            <span className="absolute -top-2 left-5">
               {cartCount}
             </span>
           )}
