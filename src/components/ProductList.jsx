@@ -7,13 +7,19 @@ const ProductList = () => {
   const [items, setItems] = useState([]);
   const [minPrice,setMinPrice]= useState("")
   const [maxPrice,setMaxPrice]= useState("")
+  const [currentPage,setCurrentPage]=useState(0)
+  const [rowPage,setRowPage]=useState(10)
+  const indexOfLastItem = currentPage* rowPage;
+  const indexOfFirstItem = indexOfLastItem-rowPage;
+  
+
 const navigate = useNavigate();
   useEffect(() => {
     const dataFetch = async () => {
       try {
-        const res = await axios.get("https://dummyjson.com/products");
+        const res = await axios.get("https://dummyjson.com/products?limit=0");
         setItems(res.data.products);
-        console.log(res.data);
+        console.log(res.data.products);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
