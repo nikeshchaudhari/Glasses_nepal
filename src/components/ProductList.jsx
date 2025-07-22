@@ -86,9 +86,9 @@ const ProductList = () => {
         </div>
         <div className="flex justify-end mx-12 mb-5 gap-5 items-center">
           <button
-            className="w-20 py-2 bg-green-700 text-white cursor-pointer"
+            className="w-20 py-2 bg-green-700 text-white cursor-pointer disabled:opacity-50 rounded-sm "
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
+            disabled={currentPage===1}
           >
             Prev
           </button>
@@ -101,7 +101,7 @@ const ProductList = () => {
             }
             disabled={currentPage===totalPages}
             
-            className="w-20 py-2 bg-blue-500 text-white cursor-pointer"
+            className="w-20 py-2 bg-green-700 text-white cursor-pointer disabled:opacity-50 rounded-sm"
           >
             Next
           </button>
