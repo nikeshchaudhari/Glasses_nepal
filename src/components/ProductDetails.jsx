@@ -24,20 +24,20 @@ const ProductDetails = () => {
     fetchData();
   }, [id]);
 
-  const handleCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart"));
-    const findCart = cart.findIndex((product) => product.id === item.id);
+  // const handleCart = () => {
+  //   const cart = JSON.parse(localStorage.getItem("cart"));
+  //   const findCart = cart.findIndex((product) => product.id === item.id);
 
-    if (findCart !== -1) {
-      cart[findCart].cartItem = cartItem + cartItem;
-    } else {
-      cart.push({ ...item, cartItem });
-    }
+  //   if (findCart !== -1) {
+  //     cart[findCart].cartItem = cartItem + cartItem;
+  //   } else {
+  //     cart.push({ ...item, cartItem });
+  //   }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("cart"));
-    console.log(`${cartItem} add to cart`);
-  };
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  //   window.dispatchEvent(new Event("cart"));
+  //   console.log(`${cartItem} add to cart`);
+  // };
 
   if (!item)
     return (
