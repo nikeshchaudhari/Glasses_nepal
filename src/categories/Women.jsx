@@ -12,13 +12,10 @@ const Women = () => {
   const indexOfLastPage = currentPage * rowPage;
   const indexOfFirstPage = indexOfLastPage - rowPage;
 
-  const currentItems = women?.slice(
-    indexOfFirstPage,
-    indexOfLastPage
-  );
+  const currentItems = women?.slice(indexOfFirstPage, indexOfLastPage);
   const totalPage = Math.ceil(women?.length / rowPage);
   console.log(totalPage);
-  
+
   const navigate = useNavigate();
   const fetchData = async () => {
     try {
@@ -43,7 +40,7 @@ const Women = () => {
       <div className="min-h-screen  overflow-x-hidden">
         <h3 className="text-center p-10 text-[24px] font-extrabold">Women</h3>
         <div className="flex flex-wrap p-10">
-          {currentItems.length> 0 ? (
+          {currentItems.length > 0 ? (
             currentItems.map((item, index) => (
               <div
                 key={index}
@@ -67,10 +64,11 @@ const Women = () => {
           )}
         </div>
       </div>
-      <div className="flex justify-end items-center mb-1 mx-8 gap-5 p-4">
+      <div className="flex justify-end items-center mb-1 mx-8 gap-5 p-4 disabled:opacity-50 ">
         <button
-          className="p-2 w-15 text-white bg-green-700 cursor-pointer rounded-sm"
+          className="p-2 w-15 text-white bg-green-700 cursor-pointer rounded-sm disabled:opacity-50"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage===1}
         >
           Prev
         </button>
@@ -78,10 +76,11 @@ const Women = () => {
           Pages {currentPage} ... {totalPage}
         </span>
         <button
-          className="p-2 w-15 text-white bg-green-700 rounded-sm cursor-pointer"
+          className="p-2 w-15 text-white bg-green-700 rounded-sm cursor-pointer disabled:opacity-50"
           onClick={() =>
             setCurrentPage((next) => Math.min(next + 1, totalPage))
           }
+          disabled={currentPage===totalPage}
         >
           Next
         </button>
