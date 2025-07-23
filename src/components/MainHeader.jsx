@@ -33,7 +33,7 @@ const MainHeader = () => {
   }, []);
   return (
     <>
-      <div className="flex justify-between items-center px-4  md:px-15 py-5 bg-white sticky z-50 top-0 transition animation-fade">
+      <div className="flex justify-between items-center px-4  md:px-15 py-5 bg-white sticky z-10 top-0 transition animation-fade">
         <div>
           <SearchIcon
             onClick={() => setShowSearch(!showSearch)}
@@ -63,7 +63,7 @@ const MainHeader = () => {
         </div>
         <div className="flex gap-5 relative">
           <LocalMallOutlinedIcon className="cursor-pointer" onClick={()=>setCartOpen(true)}/>
-            <Cart cartOpen={cartOpen} cartClose ={()=>setCartOpen(false)}/>
+            <Cart cartOpen={cartOpen} cartClose={()=>setCartOpen(false)}/>
           {cartCount > 0 && (
             <span className="absolute -top-2 left-5">{cartCount}</span>
           )}
