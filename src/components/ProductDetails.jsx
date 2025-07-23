@@ -24,20 +24,7 @@ const ProductDetails = () => {
     fetchData();
   }, [id]);
 
-  // const handleCart = () => {
-  //   const cart = JSON.parse(localStorage.getItem("cart"));
-  //   const findCart = cart.findIndex((product) => product.id === item.id);
-
-  //   if (findCart !== -1) {
-  //     cart[findCart].cartItem = cartItem + cartItem;
-  //   } else {
-  //     cart.push({ ...item, cartItem });
-  //   }
-
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  //   window.dispatchEvent(new Event("cart"));
-  //   console.log(`${cartItem} add to cart`);
-  // };
+  
 
   if (!item)
     return (
@@ -45,6 +32,18 @@ const ProductDetails = () => {
         Loading.......
       </p>
     );
+    const handleCart = () => {
+    const cart = localStorage.getItem("cart") || [];
+    const findItem = cart.findIndex((pro) => pro.id === item.id);
+    if (findItem !== -1) {
+      cart[findItem].cartItem +=1;
+    } else {
+      cart.push({ ...item, cartItem:1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("cart"));
+    console.log("Add to cart");
+  };
 
   return (
     <>
@@ -81,17 +80,29 @@ const ProductDetails = () => {
             <button
               className="bg-black text-white text-[10px] md:text-[15px] w-20 md:w-[20vw] py-3 md:p-3 cursor-pointer"
               onClick={() => {
-                //   const cart = localStorage.getItem("cart") || [];
+                  // const cart = localStorage.getItem("cart") || [];
                 //   cart.push(item);
                 //   localStorage.setItem("cart", JSON.stringify(cart));
                 //   alert("Add to cart")
 
-                const cart = JSON.parse(localStorage.getItem("cart")) || [];
-                cart.push(item);
-                localStorage.setItem("cart", JSON.stringify(cart));
+                // const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                // cart.push(item);
+                // localStorage.setItem("cart", JSON.stringify(cart));
+                // window.dispatchEvent(new Event("cart"));
+                // console.log("Add to cart");
+
+                const cart = localStorage.getItem("cart") || []
+                const findUs = cart.findIndex((prod)=>(prod.id==item.id))
+                if(findUs !== -1){
+                  cart[findUs].cartItem +=1;
+                }else{
+                  cart.push(item)
+                }
+                localStorage.setItem("cart",JSON.stringify(cart))
                 window.dispatchEvent(new Event("cart"));
-                console.log("Add to cart");
-              }}
+                alert("add cart");
+              }
+            }
             >
               Add Cart
             </button>
