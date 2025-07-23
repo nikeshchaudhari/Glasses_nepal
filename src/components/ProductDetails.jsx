@@ -50,16 +50,16 @@ const ProductDetails = () => {
     <>
       <MainHeader />
       <Navbar />
-      <div className="md:flex lg:mt-15">
-        <div className="flex justify-center w-[400px] md:w-[700px] h-[250px] md:h-[450px] shadow-2xl mx-[50px] sm:mx-0 ">
-          <img src={item.images} alt="" className="lg:w-[500px] lg: " />
+      <div className="md:flex lg:mt-15 w-full">
+        <div className="flex justify-center w-[400px] md:w-[700px] h-[250px] md:h-[450px] shadow-2xl lg:mx-[50px] sm:mx-[190px] md:mx-[5px] mx-30 mt-10 md:mt-0">
+          <img src={item.images} alt="" className="lg:w-[500px]  " />
         </div>
-        <div className="flex flex-col md:justify-start  bg-red-500 gap-3 w-[200px] md:w-[600px]">
+        <div className="flex flex-col md:justify-start gap-3 md:w-[500px] mx-30 md:mx-5 lg:mx-0 w-[500px] mt-10">
           <h1 className="text-2xl font-bold">{item.title}</h1>
 
           <p className="font-bold">Rs. {item.price}</p>
           <p className=" pr-10 ">{item.description}</p>
-          <div className="flex justify-around items-center w-120 gap-5">
+          <div className="flex md:justify-around items-center w-120 md:gap-5">
             <div className="flex gap-5 items-center">
               <div
                 className=" shadow-2xl p-5 cursor-pointer hover:bg-slate-50 hover:shadow-lg transition hover:duration-500"
