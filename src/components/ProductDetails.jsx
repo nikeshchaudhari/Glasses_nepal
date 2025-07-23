@@ -50,15 +50,15 @@ const ProductDetails = () => {
     <>
       <MainHeader />
       <Navbar />
-      <div className="flex mt-15">
-        <div className=" w-[900px] lg:w-[800px] h-[250px] lg:h-[500px] shadow-2xl mx-10">
-          <img src={item.images} alt="" className="w-[500px]" />
+      <div className="md:flex lg:mt-15">
+        <div className="flex justify-center w-[400px] md:w-[700px] h-[250px] md:h-[450px] shadow-2xl mx-[50px] sm:mx-0 ">
+          <img src={item.images} alt="" className="lg:w-[500px] lg: " />
         </div>
-        <div className="flex flex-col justify-start gap-3 w-[800px]">
+        <div className="flex flex-col md:justify-start  bg-red-500 gap-3 w-[200px] md:w-[600px]">
           <h1 className="text-2xl font-bold">{item.title}</h1>
 
           <p className="font-bold">Rs. {item.price}</p>
-          <p className="text-justify pr-10">{item.description}</p>
+          <p className=" pr-10 ">{item.description}</p>
           <div className="flex justify-around items-center w-120 gap-5">
             <div className="flex gap-5 items-center">
               <div
@@ -72,7 +72,7 @@ const ProductDetails = () => {
               </div>
               <div
                 className=" shadow-2xl p-5 cursor-pointer hover:bg-slate-50 hover:shadow-lg transition hover:duration-500"
-                onClick={() => setCartItem((add)=>Math.min(add+1,10))}
+                onClick={() => setCartItem((add) => Math.min(add + 1, 10))}
               >
                 {" "}
                 <FaPlus />
