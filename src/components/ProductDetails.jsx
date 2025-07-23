@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainHeader from "./MainHeader";
 import Navbar from "./Navbar";
+import { FaMinus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
+  const [cartItem, setCartItem] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,17 +18,34 @@ const ProductDetails = () => {
 
         setItem(res.data);
       } catch (err) {
-        console.log("Something errore", err);
+        console.log("Something error", err);
       }
     };
     fetchData();
   }, [id]);
+
+  const handleCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    const findCart = cart.findIndex((product) => product.id === item.id);
+
+    if (findCart !== -1) {
+      cart[findCart].cartItem = cartItem + cartItem;
+    } else {
+      cart.push({ ...item, cartItem });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("cart"));
+    console.log(`${cartItem} add to cart`);
+  };
+
   if (!item)
     return (
       <p className="text-center flex justify-center items-center h-screen">
         Loading.......
       </p>
     );
+
   return (
     <>
       <MainHeader />
@@ -36,26 +56,46 @@ const ProductDetails = () => {
         </div>
         <div className="flex flex-col justify-start gap-3 w-[800px]">
           <h1 className="text-2xl font-bold">{item.title}</h1>
-         
-          <p className="font-bold">Rs. {item.price}</p>
-           <p className="text-justify pr-10">{item.description}</p>
-          <button className="bg-black text-white text-[10px] md:text-[15px] w-20 md:w-[20vw] py-3 md:p-3 cursor-pointer"
-            onClick={() => {
-            //   const cart = localStorage.getItem("cart") || [];
-            //   cart.push(item);
-            //   localStorage.setItem("cart", JSON.stringify(cart));
-            //   alert("Add to cart")
 
-            const cart = JSON.parse(localStorage.getItem("cart")) || []
-            cart.push(item);
-            localStorage.setItem("cart",JSON.stringify(cart))
-            window.dispatchEvent(new Event("cart"))
-            console.log("Add to cart");
-            
-            }}
-          >
-            Add Cart
-          </button>
+          <p className="font-bold">Rs. {item.price}</p>
+          <p className="text-justify pr-10">{item.description}</p>
+          <div className="flex justify-around items-center w-120 gap-5">
+            <div className="flex gap-5 items-center">
+              <div
+                className=" shadow-2xl p-5 cursor-pointer hover:bg-slate-50 hover:shadow-lg transition hover:duration-500"
+                onClick={() => setCartItem((prev) => Math.max(prev - 1, 1))}
+              >
+                <FaMinus />
+              </div>
+              <div>
+                <span>{cartItem}</span>{" "}
+              </div>
+              <div
+                className=" shadow-2xl p-5 cursor-pointer hover:bg-slate-50 hover:shadow-lg transition hover:duration-500"
+                onClick={() => setCartItem((add)=>Math.min(add+1,10))}
+              >
+                {" "}
+                <FaPlus />
+              </div>
+            </div>
+            <button
+              className="bg-black text-white text-[10px] md:text-[15px] w-20 md:w-[20vw] py-3 md:p-3 cursor-pointer"
+              onClick={() => {
+                //   const cart = localStorage.getItem("cart") || [];
+                //   cart.push(item);
+                //   localStorage.setItem("cart", JSON.stringify(cart));
+                //   alert("Add to cart")
+
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cart.push(item);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                window.dispatchEvent(new Event("cart"));
+                console.log("Add to cart");
+              }}
+            >
+              Add Cart
+            </button>
+          </div>
         </div>
       </div>
     </>
