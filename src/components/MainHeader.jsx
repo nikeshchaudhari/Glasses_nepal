@@ -62,7 +62,7 @@ const MainHeader = () => {
           />
         </div>
         <div className="flex gap-5 relative">
-          <LocalMallOutlinedIcon className="cursor-pointer" onClick={()=>setCartCount(true)}/>
+          <LocalMallOutlinedIcon className="cursor-pointer" onClick={()=>setCartOpen(true)}/>
             <Cart cartOpen={cartOpen} cartClose ={()=>setCartOpen(false)}/>
           {cartCount > 0 && (
             <span className="absolute -top-2 left-5">{cartCount}</span>
