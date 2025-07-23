@@ -17,15 +17,15 @@ const MainHeader = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartCount(cart.length);
 
-    const handlecartUpdate = () => {
+    const handleCartUpdate = () => {
       const updateCart = JSON.parse(localStorage.getItem("cart")) || [];
       setCartCount(updateCart.length);
     };
 
-    window.addEventListener("cart", handlecartUpdate);
+    window.addEventListener("cart", handleCartUpdate);
 
     return () => {
-      window.removeEventListener("cart", handlecartUpdate);
+      window.removeEventListener("cart", handleCartUpdate);
     };
   }, []);
   return (
