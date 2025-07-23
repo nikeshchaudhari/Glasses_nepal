@@ -8,11 +8,14 @@ import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import { Link } from "react-router-dom";
 import SearchInput from "./SearchInput";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import Cart from "../pages/Cart";
 const MainHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isArrow, setIsArrow] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [showSearch, setShowSearch] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartCount(cart.length);
@@ -42,8 +45,11 @@ const MainHeader = () => {
             <div className="flex items-center gap-3 mt-10">
               <SearchInput className="mt-5" />
 
-              <div className="mb-12 cursor-pointer" onClick={()=>setShowSearch(false)}>
-                <CloseOutlinedIcon/>
+              <div
+                className="mb-12 cursor-pointer"
+                onClick={() => setShowSearch(false)}
+              >
+                <CloseOutlinedIcon />
               </div>
             </div>
           </div>
@@ -56,7 +62,8 @@ const MainHeader = () => {
           />
         </div>
         <div className="flex gap-5 relative">
-          <LocalMallOutlinedIcon className="cursor-pointer" />
+          <LocalMallOutlinedIcon className="cursor-pointer" onClick={()=>setCartCount(true)}/>
+            <Cart cartOpen={cartOpen} cartClose ={()=>setCartOpen(false)}/>
           {cartCount > 0 && (
             <span className="absolute -top-2 left-5">{cartCount}</span>
           )}
