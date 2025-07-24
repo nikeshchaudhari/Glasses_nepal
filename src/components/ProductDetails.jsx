@@ -89,22 +89,21 @@ const ProductDetails = () => {
                 // window.dispatchEvent(new Event("cart"));
                 // console.log("Add to cart");
 
-               const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Check if product already exists in cart
-const alreadyInCart = cart.find((prod) => prod.id === item.id);
+                // Check if product already exists in cart
+                const alreadyInCart = cart.find((prod) => prod.id === item.id);
 
-if (!alreadyInCart) {
-  // If not already in cart, add it
-  cart.push(item);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  window.dispatchEvent(new Event("cart"));
-  console.log("Added to cart");
-} else {
-  // Already in cart
-  alert("This product is already in your cart.");
-}
-
+                if (!alreadyInCart) {
+                  // If not already in cart, add it
+                  cart.push(item);
+                  localStorage.setItem("cart", JSON.stringify(cart));
+                  window.dispatchEvent(new Event("cart"));
+                  console.log("Added to cart");
+                } else {
+                  // Already in cart
+                  alert("This product is already in your cart.");
+                }
               }}
             >
               Add Cart
