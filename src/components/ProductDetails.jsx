@@ -47,11 +47,11 @@ const ProductDetails = () => {
     <>
       <MainHeader />
       <Navbar />
-      <div className="md:flex lg:mt-15 w-full">
-        <div className="flex justify-center w-[400px] md:w-[700px] h-[250px] md:h-[450px] shadow-2xl lg:mx-[50px] sm:mx-[190px] md:mx-[5px] mx-30 mt-10 md:mt-0">
+      <div className="md:flex lg:mt-15 w-full overflow-hidden">
+        <div className="flex justify-center w-[400px] md:w-[700px] h-[250px] md:h-[450px] shadow-2xl lg:mx-[50px] sm:mx-[190px] md:mx-[5px] mx-1 mt-10 md:mt-0">
           <img src={item.images} alt="" className="lg:w-[500px]  " />
         </div>
-        <div className="flex flex-col md:justify-start gap-3 md:w-[500px] mx-30 md:mx-5 lg:mx-0 w-[500px] mt-10">
+        <div className="flex flex-col md:justify-start gap-3 md:w-[500px] mx-10 md:mx-5 lg:mx-0 w-[400px] mt-10">
           <h1 className="text-2xl font-bold">{item.title}</h1>
 
           <p className="font-bold">Rs. {item.price}</p>
