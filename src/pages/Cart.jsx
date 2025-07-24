@@ -8,9 +8,12 @@ const Cart = ({ cartOpen, cartClose }) => {
 
   const handleCart = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
     //  console.log(cart);
 
-    setCartItem(cart);
+    // setCartItem(cart);
+    const validCart = cart.filter((item) => item && item.images);
+    setCartItem(validCart);
   };
   useEffect(() => {
     handleCart();
@@ -18,18 +21,21 @@ const Cart = ({ cartOpen, cartClose }) => {
     return () => window.removeEventListener("cart", handleCart);
   }, []);
 
-  const quantityUpdate = (id,change)=>{
-    const update = cartItem.map((item)=>{
-      item.id === id ? {...item, quantity:Math.max(1,item.quantity+change)}:item
-    })
-    setCartItem(update)
-    localStorage.setItem("cart",JSON.stringify(update))
-    window.dispatchEvent(new Event("cart"))
-  }
+  const quantityUpdate = (id, change) => {
+    const update = cartItem.map((item) => {
+    if(item===id){
+      const qty = Math.max(1,item.quantity+change)
+      return{...item,quantity:qty}
+    }
+    });
+    localStorage.setItem("cart", JSON.stringify(update));
+    setCartItem(update);
+    window.dispatchEvent(new Event("cart"));
+  };
 
-  const getTotal = ()=>{
-    cartItem.reduce((sum,item)=>sum+ item.price*item.quantity,0)
-  }
+  const getTotal = () => {
+    return cartItem.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  };
   return (
     <>
       <div
@@ -54,12 +60,12 @@ const Cart = ({ cartOpen, cartClose }) => {
         </div>
         <div>
           {cartItem.length === 0 ? (
-            <p>No Cart ADD</p>
+            <p className="text-center mt-50">No Cart ADD</p>
           ) : (
             cartItem.map((item) => (
               <div key={item.id} className="flex mt-2 ml-5">
                 <div className=" mx-3 border rounded-lg">
-                  <img src={item.images} alt="" className="w-20 " />
+                  <img src={item.images?.[0]} alt="" className="w-20 " />
                 </div>
                 <div>
                   <h3 className="md:text-[15px] text-[12px] mt-3">
@@ -67,11 +73,17 @@ const Cart = ({ cartOpen, cartClose }) => {
                   </h3>
 
                   <div className="flex gap-5 mt-5 ml-4 w-full items-center  ">
-                    <div className="bg-black/35 text-white cursor-pointer p-3" onClick={()=> quantityUpdate(item.id,-1)}>
+                    <div
+                      className="bg-black/35 text-white cursor-pointer p-3"
+                      onClick={() => quantityUpdate(item.id, -1)}
+                    >
                       <FaMinus />
                     </div>
-                    <span>{item.quantity}</span>
-                    <div className="bg-black/35 text-white cursor-pointer p-3" onClick={()=>quantityUpdate(item.id,1)}>
+                    <span className="text-black bg-red-700">{item.quantity}</span>
+                    <div
+                      className="bg-black/35 text-white cursor-pointer p-3"
+                      onClick={() => quantityUpdate(item.id, 1)}
+                    >
                       <FaPlus />
                     </div>
                     <p className="ml-30">Price : {item.price}</p>
@@ -81,9 +93,11 @@ const Cart = ({ cartOpen, cartClose }) => {
             ))
           )}
         </div>
-            <p className="text-sm text-gray-500">
-                  Subtotal: Rs. {item.quantity * item.price}
-                </p>
+         {cartItem.length > 0 && (
+          <div className="p-4 text-right font-semibold">
+            Subtotal: Rs. {getTotal()}
+          </div>
+        )}
       </div>
     </>
   );
