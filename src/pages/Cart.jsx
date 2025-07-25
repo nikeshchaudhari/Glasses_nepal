@@ -6,32 +6,12 @@ import { FaPlus } from "react-icons/fa";
 const Cart = ({ cartOpen, cartClose }) => {
   const [cartItem, setCartItem] = useState([]);
 
-  const handleCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    //  console.log(cart);
-
-    // setCartItem(cart);
-    const validCart = cart.filter((item) => item && item.images);
-    setCartItem(validCart);
-  };
+  
   useEffect(() => {
-    handleCart();
-    window.addEventListener("cart", handleCart);
-    return () => window.removeEventListener("cart", handleCart);
+   
   }, []);
 
-  const quantityUpdate = (id, change) => {
-    const update = cartItem.map((item) => {
-    if(item===id){
-      const qty = Math.max(1,item.quantity+change)
-      return{...item,quantity:qty}
-    }
-    });
-    localStorage.setItem("cart", JSON.stringify(update));
-    setCartItem(update);
-    window.dispatchEvent(new Event("cart"));
-  };
+  
 
   const getTotal = () => {
     return cartItem.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -64,8 +44,8 @@ const Cart = ({ cartOpen, cartClose }) => {
           ) : (
             cartItem.map((item) => (
               <div key={item.id} className="flex mt-2 ml-5">
-                <div className=" mx-3 border rounded-lg">
-                  <img src={item.images?.[0]} alt="" className="w-20 " />
+                <div className=" w-40 mx-3 border rounded-lg">
+                  <img src={item.images?.[0]} alt="" className=" md:w-20 " />
                 </div>
                 <div>
                   <h3 className="md:text-[15px] text-[12px] mt-3">
@@ -75,14 +55,14 @@ const Cart = ({ cartOpen, cartClose }) => {
                   <div className="flex gap-5 mt-5 ml-4 w-full items-center  ">
                     <div
                       className="bg-black/35 text-white cursor-pointer p-3"
-                      onClick={() => quantityUpdate(item.id, -1)}
+                      // onClick={() => quantityUpdate(item.id, -1)}
                     >
                       <FaMinus />
                     </div>
                     <span className="text-black bg-red-700">{item.quantity}</span>
                     <div
                       className="bg-black/35 text-white cursor-pointer p-3"
-                      onClick={() => quantityUpdate(item.id, 1)}
+                      // onClick={() => quantityUpdate(item.id, 1)}
                     >
                       <FaPlus />
                     </div>
