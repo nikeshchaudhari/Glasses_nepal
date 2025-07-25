@@ -13,9 +13,6 @@ const Cart = ({ cartOpen, cartClose }) => {
 
   
 
-  const getTotal = () => {
-    return cartItem.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  };
   return (
     <>
       <div
@@ -55,14 +52,12 @@ const Cart = ({ cartOpen, cartClose }) => {
                   <div className="flex gap-5 mt-5 ml-4 w-full items-center  ">
                     <div
                       className="bg-black/35 text-white cursor-pointer p-3"
-                      // onClick={() => quantityUpdate(item.id, -1)}
                     >
                       <FaMinus />
                     </div>
                     <span className="text-black bg-red-700">{item.quantity}</span>
                     <div
                       className="bg-black/35 text-white cursor-pointer p-3"
-                      // onClick={() => quantityUpdate(item.id, 1)}
                     >
                       <FaPlus />
                     </div>
@@ -73,11 +68,7 @@ const Cart = ({ cartOpen, cartClose }) => {
             ))
           )}
         </div>
-         {cartItem.length > 0 && (
-          <div className="p-4 text-right font-semibold">
-            Subtotal: Rs. {getTotal()}
-          </div>
-        )}
+        {/*  */}
       </div>
     </>
   );
