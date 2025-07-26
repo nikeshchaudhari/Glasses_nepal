@@ -67,7 +67,7 @@ const Cart = ({ cartOpen, cartClose }) => {
           ) : (
             cartItem.map((item) => (
               <div key={item.id} className="flex mt-2 ml-5">
-                <div className=" w-25 mx-3 border rounded-lg">
+                <div className=" w-20 md:w-25 mx-3 border rounded-lg">
                   <img src={item.images?.[0]} alt="" className=" md:w-20 " />
                 </div>
                 <div>
@@ -89,8 +89,8 @@ const Cart = ({ cartOpen, cartClose }) => {
                     >
                       <FaPlus />
                     </div>
-                    <p className="ml-30">
-                      Price :{Number(item.price || 0) * Number(item.quantity || 1)}
+                    <p className=" md:ml-30 ">
+                      Price :{(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}
                     </p>
                   </div>
                 </div>
