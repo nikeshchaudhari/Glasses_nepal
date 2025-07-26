@@ -15,19 +15,26 @@ const Cart = ({ cartOpen, cartClose }) => {
   useEffect(() => {
     cartHandle();
     window.addEventListener("cart", cartHandle);
-    return window.removeEventListener("cart", cartHandle);
+    return () => window.removeEventListener("cart", cartHandle);
   }, []);
 
   // Update Cart
 
   const updateCart = (id, change) => {
-    const update = cartItem.map((item) => {
-      if (item.id === id) {
-        const qty = Math.max(1, item.quantity + change);
-        return { ...item, quantity: qty };
-      }
-      return item;
-    });
+    const update = cartItem
+      .map((item) => {
+        if (item.id === id) {
+          const currentQty = Number(item.quantity) || 1;
+          const newQty = currentQty + change;
+          if (newQty <= 0) return null;
+
+          const qty = Math.min(10, newQty);
+          return { ...item, quantity: qty };
+        }
+        return item;
+      })
+      .filter(Boolean);
+
     localStorage.setItem("cart", JSON.stringify(update));
     setCartItem(update);
     window.dispatchEvent(new Event("cart"));
@@ -69,16 +76,22 @@ const Cart = ({ cartOpen, cartClose }) => {
                   </h3>
 
                   <div className="flex gap-5 mt-5 ml-4 w-full items-center  ">
-                    <div className="bg-black/35 text-white cursor-pointer p-3" onClick={()=>updateCart(item.id, -1)}>
+                    <div
+                      className="bg-black/35 text-white cursor-pointer p-3"
+                      onClick={() => updateCart(item.id, -1)}
+                    >
                       <FaMinus />
                     </div>
-                    <span className="text-black">
-                      {item.quantity}
-                    </span>
-                    <div className="bg-black/35 text-white cursor-pointer p-3 " onClick={()=>updateCart(item.id,1)}>
+                    <span className="text-black">{item.quantity}</span>
+                    <div
+                      className="bg-black/35 text-white cursor-pointer p-3 "
+                      onClick={() => updateCart(item.id, 1)}
+                    >
                       <FaPlus />
                     </div>
-                    <p className="ml-30">Price : {item.price*item.quantity}</p>
+                    <p className="ml-30">
+                      Price :{Number(item.price || 0) * Number(item.quantity || 1)}
+                    </p>
                   </div>
                 </div>
               </div>
