@@ -6,13 +6,32 @@ import { FaPlus } from "react-icons/fa";
 const Cart = ({ cartOpen, cartClose }) => {
   const [cartItem, setCartItem] = useState([]);
 
-  
+  const cartHandle = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartValid = cart.filter((i) => i && i.images);
+    setCartItem(cartValid);
+  };
+
   useEffect(() => {
-   
+    cartHandle();
+    window.addEventListener("cart", cartHandle);
+    return window.removeEventListener("cart", cartHandle);
   }, []);
 
-  
+  // Update Cart
 
+  const updateCart = (id, change) => {
+    const update = cartItem.map((item) => {
+      if (item.id === id) {
+        const qty = Math.max(1, item.quantity + change);
+        return { ...item, quantity: qty };
+      }
+      return item;
+    });
+    localStorage.setItem("cart", JSON.stringify(update));
+    setCartItem(update);
+    window.dispatchEvent(new Event("cart"));
+  };
   return (
     <>
       <div
@@ -41,7 +60,7 @@ const Cart = ({ cartOpen, cartClose }) => {
           ) : (
             cartItem.map((item) => (
               <div key={item.id} className="flex mt-2 ml-5">
-                <div className=" w-40 mx-3 border rounded-lg">
+                <div className=" w-25 mx-3 border rounded-lg">
                   <img src={item.images?.[0]} alt="" className=" md:w-20 " />
                 </div>
                 <div>
@@ -50,18 +69,16 @@ const Cart = ({ cartOpen, cartClose }) => {
                   </h3>
 
                   <div className="flex gap-5 mt-5 ml-4 w-full items-center  ">
-                    <div
-                      className="bg-black/35 text-white cursor-pointer p-3"
-                    >
+                    <div className="bg-black/35 text-white cursor-pointer p-3" onClick={()=>updateCart(item.id, -1)}>
                       <FaMinus />
                     </div>
-                    <span className="text-black bg-red-700">{item.quantity}</span>
-                    <div
-                      className="bg-black/35 text-white cursor-pointer p-3"
-                    >
+                    <span className="text-black">
+                      {item.quantity}
+                    </span>
+                    <div className="bg-black/35 text-white cursor-pointer p-3 " onClick={()=>updateCart(item.id,1)}>
                       <FaPlus />
                     </div>
-                    <p className="ml-30">Price : {item.price}</p>
+                    <p className="ml-30">Price : {item.price*item.quantity}</p>
                   </div>
                 </div>
               </div>
