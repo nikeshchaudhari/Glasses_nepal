@@ -78,16 +78,7 @@ const ProductDetails = () => {
             <button
               className="bg-black text-white text-[10px] md:text-[15px] w-20 md:w-[20vw] py-3 md:p-3 cursor-pointer"
               onClick={() => {
-                // const cart = localStorage.getItem("cart") || [];
-                //   cart.push(item);
-                //   localStorage.setItem("cart", JSON.stringify(cart));
-                //   alert("Add to cart")
-
-                // const cart = JSON.parse(localStorage.getItem("cart")) || [];
-                // cart.push(item);
-                // localStorage.setItem("cart", JSON.stringify(cart));
-                // window.dispatchEvent(new Event("cart"));
-                // console.log("Add to cart");
+          
 
                 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -95,8 +86,8 @@ const ProductDetails = () => {
                 const alreadyInCart = cart.find((prod) => prod.id === item.id);
 
                 if (!alreadyInCart) {
-                  // If not already in cart, add it
-                  cart.push(item);
+                  // If not already 
+                  cart.push({...item,quantity:cartItem});
                   localStorage.setItem("cart", JSON.stringify(cart));
                   window.dispatchEvent(new Event("cart"));
                   console.log("Added to cart");
