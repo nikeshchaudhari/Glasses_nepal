@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import axios from "axios";
 
 const schema = () =>
   Yup.object().shape({
@@ -19,9 +20,17 @@ const Login = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => {
-    console.log("Form Data :", data);
-    alert("login sucessfully...");
+  const onSubmit = async(data) => {
+    try{
+
+      const res = await axios("http://localhost:4080/user/login")
+      
+    }
+    catch(err){
+
+    }
+
+
   };
   return (
     <>
@@ -34,7 +43,7 @@ const Login = () => {
         <div className="flex items-center justify-center w-full mx-auto  h-screen">
           <div className="w-[350px] md:w-[500px] min-h-80 text-center p-5 border rounded-2xl ">
             <h2 className="py-5 text-[25px] font-semibold">Admin Login</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} >
               <div>
                 <input
                   {...register("email")}
