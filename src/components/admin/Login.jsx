@@ -1,18 +1,19 @@
 import React from "react";
 import { Formik, useFormik } from "formik";
-import {signUpSchema} from "./schema"
+import { loginSchema } from "../admin/schema";
 const initialValues = {
   email: "",
   password: "",
 };
 const Login = () => {
-  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: initialValues,
-    validationSchema:signUpSchema,
-    onSubmit: (value) => {
-      console.log(value);
-    },
-  });
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: initialValues,
+      validationSchema: loginSchema,
+      onSubmit: (value) => {
+        console.log(value);
+      },
+    });
   // console.log(Formik);
 
   return (
@@ -20,27 +21,37 @@ const Login = () => {
       <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-8">
         <h2 className="mb-6 text-2xl font-semibold text-center">Admin Login</h2>
         <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="enter your email "
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className="border w-full p-3 rounded-md "
-          />{" "}
+          <div>
+            <input
+              type="email"
+              placeholder="enter your email "
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="border w-full p-3 rounded-md "
+            />
+            {errors.email && touched.email ? (
+              <p className="text-red-700">{errors.email}</p>
+            ) : null}{" "}
+          </div>
           <br />
-          <br />
-          <input
-            type="password"
-            placeholder="enter your password"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className="w-full p-3 border rounded-md"
-          />
-          <br />
+
+          <div>
+            <input
+              type="password"
+              placeholder="enter your password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className="w-full p-3 border rounded-md"
+            />
+            {errors.password && touched.password ? (
+              <p className="text-red-700">{errors.password}</p>
+            ) : null}{" "}
+          </div>
+
           <br />
           <button
             type="submit"
