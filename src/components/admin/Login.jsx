@@ -1,77 +1,55 @@
 import React from "react";
-import { motion } from "motion/react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-import axios from "axios";
-
-const schema = () =>
-  Yup.object().shape({
-    email: Yup.string().email("Invalid Email..").required("Email is required"),
-    password: Yup.string()
-      .min(8, "password must be at least 8 character")
-      .required("Password is required"),
-  });
+import { Formik, useFormik } from "formik";
+const initialValues = {
+  nme: "",
+  password: "",
+};
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
+  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: initialValues,
+    onSubmit: (value) => {
+      console.log(value);
+    },
   });
-  const onSubmit = async(data) => {
-    try{
+  console.log(Formik);
 
-      const res = await axios("http://localhost:4080/user/login")
-      
-    }
-    catch(err){
-
-    }
-
-
-  };
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      
-      >
-        <div className="flex items-center justify-center w-full mx-auto  h-screen">
-          <div className="w-[350px] md:w-[500px] min-h-80 text-center p-5 border rounded-2xl ">
-            <h2 className="py-5 text-[25px] font-semibold">Admin Login</h2>
-            <form onSubmit={handleSubmit(onSubmit)} >
-              <div>
-                <input
-                  {...register("email")}
-                  type="email"
-                  placeholder="enter your email"
-                  className="bg-white w-full p-3  rounded-sm border-[1px] outline-black/50"
-                />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-              </div>
-              <br />
-              <div>
-                <input
-                  {...register("password")}
-                  type="password"
-                  placeholder="enter your password"
-                  className="bg-white w-full p-3 rounded-sm border-1 outline-black/50"
-                />
-                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
-              </div>
-              <button type="submit" className=" p-3 bg-green-600 text-white mt-5 w-40 rounded-sm hover:bg-gradient-to-r from-green-300 to-green-600  cursor-pointer transition hover:duration-700">
-                Login
-              </button>
-            </form>
-          </div>
-        </div>
-      </motion.div>
-    </>
+    <div className="min-h-screen flex items-center justify-center bg-slate-100">
+      <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-8">
+        <h2 className="mb-6 text-2xl font-semibold text-center">Admin Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="enter your email "
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className="border w-full p-3 rounded-md "
+          />{" "}
+          <br />
+          <br />
+          <input
+            type="password"
+            placeholder="enter your password"
+            name="password"
+            value={values.password}
+         
+           onChange={handleChange}
+           onBlur={handleBlur}
+            className="w-full p-3 border rounded-md"
+          />
+          <br />
+          <br />
+          <button
+            type="submit"
+            className="bg-slate-700 p-3 w-40 text-white rounded-md hover:bg-slate-500 cursor-pointer mx-25"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
-
 export default Login;
