@@ -1,17 +1,19 @@
 import React from "react";
 import { Formik, useFormik } from "formik";
+import {signUpSchema} from "./schema"
 const initialValues = {
-  nme: "",
+  email: "",
   password: "",
 };
 const Login = () => {
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
+    validationSchema:signUpSchema,
     onSubmit: (value) => {
       console.log(value);
     },
   });
-  console.log(Formik);
+  // console.log(Formik);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
@@ -34,9 +36,8 @@ const Login = () => {
             placeholder="enter your password"
             name="password"
             value={values.password}
-         
-           onChange={handleChange}
-           onBlur={handleBlur}
+            onChange={handleChange}
+            onBlur={handleBlur}
             className="w-full p-3 border rounded-md"
           />
           <br />
