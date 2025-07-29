@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Sunglass from "./categories/Sunglass";
 import SportGlass from "./categories/SportGlass"
 import ProductDetails from "./components/ProductDetails";
+import Admin from "./pages/Admin";
 
 
 const myroute = createBrowserRouter([
@@ -20,6 +21,7 @@ const myroute = createBrowserRouter([
   {path:"/categories/sunglass",Component:Sunglass},
   {path:"/categories/sportglass",Component:SportGlass},
   {path:"/about-us",Component:About},
+  {path:"/admin",Component:Admin},
   {path:"*",Component:Error}
   
 ])
