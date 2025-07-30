@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, useFormik } from "formik";
 import { loginSchema } from "../admin/schema";
 import { useNavigate } from "react-router-dom";
@@ -10,26 +10,34 @@ const initialValues = {
   password: "",
 };
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  useEffect(()=>{
+    const token = localStorage.getItem("token")
+     if (token) {
+    navigate("/admin/dashboard");
+  }
+
+  },[navigate])
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: loginSchema,
-      onSubmit: async(value) => {
-        try{
-          const response = await axios.post("http://localhost:4080/user/login",value);
-          localStorage.setItem("token",response.data.token)
+      onSubmit: async (value) => {
+        try {
+          const response = await axios.post(
+            "http://localhost:4080/user/login",
+            value
+          );
+          console.log(response.data);
 
-          toast.success("Login Sucessfully..")
+          localStorage.setItem("token", response.data.token);
+
+          toast.success("Login Sucessfully..");
           navigate("/admin/dashboard");
-          
-
+        } catch (err) {
+          console.error("Error during login:", err);
+          toast.error("Login invalid!");
         }
-        catch(err){
-          toast.error("Login Failed..")
-
-        }
-       
       },
     });
   // console.log(Formik);
