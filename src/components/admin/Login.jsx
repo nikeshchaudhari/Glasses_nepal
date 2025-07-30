@@ -1,17 +1,35 @@
 import React from "react";
 import { Formik, useFormik } from "formik";
 import { loginSchema } from "../admin/schema";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+
 const initialValues = {
   email: "",
   password: "",
 };
 const Login = () => {
+  const navigate = useNavigate()
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialValues,
       validationSchema: loginSchema,
-      onSubmit: (value) => {
-        console.log(value);
+      onSubmit: async(value) => {
+        try{
+          const response = await axios.post("http://localhost:4080/user/login",value);
+          localStorage.setItem("token",response.data.token)
+
+          toast.success("Login Sucessfully..")
+          navigate("/admin/dashboard");
+          
+
+        }
+        catch(err){
+          toast.error("Login Failed..")
+
+        }
+       
       },
     });
   // console.log(Formik);
