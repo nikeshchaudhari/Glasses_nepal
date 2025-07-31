@@ -33,7 +33,7 @@ const Login = () => {
           localStorage.setItem("token", response.data.token);
 
           toast.success("Login Sucessfully..");
-          navigate("/admin/dashboard");
+          navigate("/dashboard");
         } catch (err) {
           console.error("Error during login:", err);
           toast.error("Login invalid!");
