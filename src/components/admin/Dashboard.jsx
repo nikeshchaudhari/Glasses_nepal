@@ -5,11 +5,11 @@ const Dashboard = () => {
   return (
    <>
    <div>
-    <div className="w-70 bg-slate-900 h-screen shadow-l text-white">
-<h2 className='font-bold text-[20px] p-5 text-center'>ADMIN</h2>
+    <div className="md:w-70 w-50 bg-slate-900 h-screen shadow-l text-white hidden md:block">
+<h2 className='md:font-bold md:text-[20px] text-[15px] p-5 text-center'>ADMIN</h2>
 <hr className='opacity-10' />
 <div className=' mt-5 w-full'>
- <ul className='text-[20px]'>
+ <ul className='md:text-[20px] text-[15px]'>
   <li className=' hover:bg-slate-700 py-2 transition hover:duration-500'>
     <Link className='ml-5'>Dashboard</Link>
   </li>
@@ -23,7 +23,7 @@ const Dashboard = () => {
     <Link className='ml-5'>Users</Link>
   </li>
  </ul>
- <button className=" text-[20px]   hover:bg-slate-700 py-2 transition hover:duration-500 w-full text-left ">
+ <button className=" md:text-[20px] text-[15px]  hover:bg-slate-700 py-2 transition hover:duration-500 w-full text-left hover:text-red-700 ">
   <Link className='ml-5'>Logout</Link>
  </button>
 </div>
