@@ -83,7 +83,7 @@ const Login = () => {
             type="submit"
             className="bg-slate-700 p-3 w-40 text-white rounded-md hover:bg-slate-500 cursor-pointer mx-25"
           >
-            Submit
+            Login
           </button>
         </form>
       </div>
