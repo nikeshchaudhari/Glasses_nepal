@@ -3,6 +3,13 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import img from "../../assets/5.jpg";
 import { Link } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+import { RiUser6Fill } from "react-icons/ri";
+import { FaUserShield } from "react-icons/fa";
+import { MdLocalShipping } from "react-icons/md";
+import { AiFillProduct } from "react-icons/ai";
+
+
+
 import axios from "axios";
 
 const MainHome = () => {
@@ -14,12 +21,10 @@ const MainHome = () => {
         setAdminCount(response.data.admin);
       } catch (err) {
         console.log(err);
-
-        
       }
     };
     fetch();
-  },[]);
+  }, []);
   return (
     <>
       <div className="w-[79vw] bg-slate-700  h-12 overflow-x-hidden">
@@ -35,14 +40,27 @@ const MainHome = () => {
         </div>
       </div>
 
-      <div className="mt-20">
-        <div className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center">
-          <FaRegUser className="text-[80px] text-center" />
-          <span className="text-[30px]">{adminCount}</span>
-          <h4 className="text-[20px] mt-1 opacity-50">WELCOME</h4>
+      <div className="mt-20 flex ">
+        <div className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <FaUserShield className="text-[80px] text-center" />
+          <span className="text-[30px] font-bold">{adminCount}</span>
+          <h4 className="text-[20px] opacity-50">ADMIN</h4>
         </div>
-        <div></div>
-        <div></div>
+        <div className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <FaRegUser className="text-[80px] text-center" />
+          <span className="text-[30px] font-bold">{adminCount}</span>
+          <h4 className="text-[20px] opacity-50">USERS</h4>
+        </div>
+        <div  className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <MdLocalShipping className="text-[80px] text-center" />
+          <span className="text-[30px] font-bold">{adminCount}</span>
+          <h4 className="text-[20px] opacity-50">ORDERS</h4>
+        </div>
+         <div  className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <AiFillProduct className="text-[80px] text-center" />
+          <span className="text-[30px] font-bold">{adminCount}</span>
+          <h4 className="text-[20px] opacity-50">ALL PRODUCTS</h4>
+        </div>
       </div>
     </>
   );
