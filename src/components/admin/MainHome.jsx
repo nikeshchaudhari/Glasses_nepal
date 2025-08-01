@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import img from "../../assets/5.jpg";
 import { Link } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+import axios from "axios";
 
 const MainHome = () => {
+  const [adminCount, setAdminCount] = useState(0);
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const response = await axios.get("http://localhost:4080/user/admin");
+        setAdminCount(response.data.admin);
+      } catch (err) {
+        console.log(err);
+
+        
+      }
+    };
+    fetch();
+  },[]);
   return (
     <>
       <div className="w-[79vw] bg-slate-700  h-12 overflow-x-hidden">
@@ -22,9 +37,9 @@ const MainHome = () => {
 
       <div className="mt-20">
         <div className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center">
-          <FaRegUser  className="text-[80px] text-center"/>
-
-          <h4 className="text-[20px] mt-3" >WELCOME</h4>
+          <FaRegUser className="text-[80px] text-center" />
+          <span className="text-[30px]">{adminCount}</span>
+          <h4 className="text-[20px] mt-1 opacity-50">WELCOME</h4>
         </div>
         <div></div>
         <div></div>
