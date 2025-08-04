@@ -7,6 +7,7 @@ import { RiUser6Fill } from "react-icons/ri";
 import { FaUserShield } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
 import { AiFillProduct } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 
@@ -27,10 +28,16 @@ const MainHome = () => {
   }, []);
   return (
     <>
-      <div className="w-[79vw] bg-slate-700  h-12 overflow-x-hidden">
+      <div className="md:w-[79vw] w-[100vw]  bg-slate-700 h-12 overflow-x-hidden">
         <div className="flex justify-between items-center  ">
-          <div className=" text-white text-[25px] font-semibold ml-5">
-            <Link to="/dashboard/main-home">Glasses Nepal</Link>
+            {/* Mobile view */}
+      <div>
+        <GiHamburgerMenu className=" text-[30px] text-white md:hidden ml-2 " />
+
+
+      </div>
+          <div className=" text-white md:text-[25px] md:font-semibold ml-5">
+            <Link to="/dashboard/main-home" >Glasses Nepal</Link>
           </div>
           <div className="flex justify-end items-center  text-white cursor-pointer -40">
             <IoIosNotificationsOutline className="text-[30px]" />
@@ -40,26 +47,26 @@ const MainHome = () => {
         </div>
       </div>
 
-      <div className="mt-20 flex ">
-        <div className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
-          <FaUserShield className="text-[80px] text-center" />
-          <span className="text-[30px] font-bold">{adminCount}</span>
-          <h4 className="text-[20px] opacity-50">ADMIN</h4>
+      <div className="mt-20 flex w-1/4 md:w-full md:flex-wrap gap-2">
+        <div className="w-[200px] md:w-60 ml-5 bg-white shadow-2xl cursor-pointer md:h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <FaUserShield className="md:text-[80px] text-center" />
+          <span className="md:text-[30px] font-bold">{adminCount}</span>
+          <h4 className="md:text-[20px] opacity-50">ADMIN</h4>
         </div>
-        <div className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
-          <FaRegUser className="text-[80px] text-center" />
-          <span className="text-[30px] font-bold">{adminCount}</span>
-          <h4 className="text-[20px] opacity-50">USERS</h4>
+        <div className="w-[200px] md:w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <FaRegUser className="md:text-[80px] text-center" />
+          <span className="md:text-[30px] font-bold">{adminCount}</span>
+          <h4 className="md:text-[20px] opacity-50">USERS</h4>
         </div>
-        <div  className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
-          <MdLocalShipping className="text-[80px] text-center" />
-          <span className="text-[30px] font-bold">{adminCount}</span>
-          <h4 className="text-[20px] opacity-50">ORDERS</h4>
+        <div  className="w-[200px] md:w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <MdLocalShipping className="md:text-[80px] text-center" />
+          <span className="md:text-[30px] font-bold">{adminCount}</span>
+          <h4 className="md:text-[20px] opacity-50">ORDERS</h4>
         </div>
-         <div  className="w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
-          <AiFillProduct className="text-[80px] text-center" />
-          <span className="text-[30px] font-bold">{adminCount}</span>
-          <h4 className="text-[20px] opacity-50">ALL PRODUCTS</h4>
+         <div  className="w-[200px] md:w-60 ml-5 bg-white shadow-2xl cursor-pointer h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
+          <AiFillProduct className="md:text-[80px] text-center" />
+          <span className="md:text-[30px] font-bold">{adminCount}</span>
+          <h4 className="md:text-[20px] opacity-50">ALL PRODUCTS</h4>
         </div>
       </div>
     </>
