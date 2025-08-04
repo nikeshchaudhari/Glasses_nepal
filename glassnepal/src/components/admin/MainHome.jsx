@@ -47,7 +47,7 @@ const MainHome = () => {
         </div>
       </div>
 
-      <div className="mt-20 flex w-1/4 md:w-full md:flex-wrap gap-2">
+      <div className="mt-20 flex flex-wrap gap-2 w-full justify-center md:justify-start">
         <div className="w-[200px] md:w-60 ml-5 bg-white shadow-2xl cursor-pointer md:h-40 flex justify-center flex-col items-center transition transform hover:-translate-y-1 hover:duration-700">
           <FaUserShield className="md:text-[80px] text-center" />
           <span className="md:text-[30px] font-bold">{adminCount}</span>
