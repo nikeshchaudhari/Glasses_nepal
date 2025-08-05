@@ -1,17 +1,17 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-// import SideNav from "./SideNav";
+import SideNav from "./SideNav";
 
 const Dashboard = () => {
   return (
     <>
-      <div className="bg-red-500 w-full min-h-screen ">
+      <div className=" w-full min-h-screen overflow-x-hidden ">
         <div className="flex w-[100vw] bg-white justify-start">
-          {/* <SideNav /> */}
+          <SideNav />
           <div className="main">
             <div className="top-container">
 
-              <Outlet/>
+                <Outlet/>
             </div>
           </div>
         </div>
