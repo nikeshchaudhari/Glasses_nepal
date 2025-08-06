@@ -11,16 +11,18 @@ cloudinary.config({
   api_key: process.env.API_KEY,
   api_secret: process.env.SECRET,
 });
+// Add Products
 route.post("/add-product",Auth, async (req, res) => {
 try{
   const user = await jwt.verify(req.headers.authorization.split(" ")[1],"jsonkey")
   console.log(user);
-
+  
   const uploadPhoto = await cloudinary.uploader.upload(
-    req.files.image.tempFilePath
+    req.files.image.tempFilePath,{
+      folder:`products/${req.body.category}`
+    }
   );
   console.log(uploadPhoto);
-  
   const addProduct = await new Product({
     _id:new mongoose.Types.ObjectId,
     name:req.body.name,
