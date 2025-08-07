@@ -60,12 +60,12 @@ const Product = () => {
   return (
     <>
       <Header />
-      <div className="md:ml-[400px] p-5">
-        <h1 className="text-center text-[30px] font-bold mt-5">
+      <div className="w-screen md:w-full px-3 md:px-[400px] md:py-5">
+        <h1 className="text-center text-[24px] md:text-[30px] font-bold mt-5">
           Add New Products
         </h1>
-        <div className="flex justify-start p-3 mt-2 w-full max-w-[400px] md:max-w-[800px] md:m-auto h-full border border-black/20 rounded-lg">
-          <form onSubmit={handleSubmit}>
+        <div className="mt-4 border border-black/20 rounded-lg p-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <label htmlFor="productname" className=" block text-[22px] mb-2 ">
               Product Name
             </label>
@@ -74,7 +74,7 @@ const Product = () => {
               name="productname"
               id=""
               placeholder="Enter product name"
-              className="block mb-2 p-2 max-w-full w-[450px] md:w-full border border-black/50 outline-0 rounded-lg "
+              className="block mb-2 p-2 max-w-full w-full md:w-full border border-black/50 outline-0 rounded-lg "
               // value={addProduct}
               onChange={(e) => setName(e.target.value)}
             />
@@ -135,9 +135,9 @@ const Product = () => {
           </form>
         </div>
       </div>
-      <div className="overflow-x-auto mt-5 flex justify-center  mb-5 ml-[350px] p-5">
-        <table className="max-w-full w-[900px] bg-white border border-gray-300 rounded-2xl">
-          <thead className="bg-gray-200">
+      <div className="overflow-x-auto mt-8">
+        <table className="  bg-white border border-gray-300 rounded-2xl w-60 md:w-full">
+          <thead className="bg-gray-200 text-sm md:text-base">
             <tr>
               <th className="text-left py-2 px-4 border-b">S.N.</th>
               <th className="text-left py-2 px-4 border-b">Product Name</th>
@@ -166,7 +166,7 @@ const Product = () => {
 
               ))
             ):(
-              <p className="text-center">Product Not Found</p>
+              <p className="w-full text-center p-5 text-red-500">Product Not Found</p>
             ) }
           </tbody>
         </table>
