@@ -9,6 +9,8 @@ const Product = () => {
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+
+  const [product,setProduct]= useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Add Product");
@@ -35,6 +37,26 @@ const Product = () => {
       toast.error("Error");
     }
   };
+
+  // get all Product 
+
+ useEffect(()=>{
+   const getProduct =async ()=>{
+    try{
+      const response = await axios.get("http://localhost:4080/product/all-product",{
+        headers:{
+          Authorization:"Bearer "+localStorage.getItem("token")
+        }
+      })
+      setProduct(response.data)
+    }
+    catch(err){
+      
+    }
+    
+  }
+  getProduct();
+ },[])
   return (
     <>
       <Header />
