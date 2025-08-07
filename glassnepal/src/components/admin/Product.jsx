@@ -136,7 +136,7 @@ const Product = () => {
         </div>
       </div>
       <div className="w-full ">
-        <table className=" w-full text-[12px] md:text-[14px]  bg-white border border-gray-300 rounded-2xl md:w-[1000px] md:ml-[300px]">
+        <table className=" w-full  text-[12px] md:text-[14px]  bg-white border border-gray-300 rounded-2xl md:w-[500px] lg:w-[1000px] md:ml-[255px] lg:ml-[260px] xl:ml-[280px] ">
           <thead className="bg-gray-200 text-sm md:text-base">
             <tr className=" ">
               <th className="py-2 border">S.N.</th>
@@ -157,10 +157,10 @@ const Product = () => {
                   <td className="border px-1 ">
                     <img src={item.imageUrl} alt="image" className="h-16 w-16 object-cover  " />
                   </td>
-                  <td className="border md:w-56 md:px-2  ">{item.description}</td>
-                  <td  className="border md:px-3 text-center">
-                    <button className="bg-green-900 p-2 rounded text-white md:mr-5 cursor-pointer">Update</button>
-                    <button className="bg-red-900 p-2 rounded text-white md:mr-5 cursor-pointer">Delete</button>
+                  <td className="border md:w-56 md:px-1  ">{item.description}</td>
+                  <td  className="border md:px-1 text-center">
+                    <button className="bg-green-900 p-2 mt-1 mb-1 rounded text-white md:mr-5 cursor-pointer">Update</button>
+                    <button className="bg-red-900 p-2 mb-1 rounded text-white md:mr-5 cursor-pointer">Delete</button>
                   </td>
                 </tr>
 
