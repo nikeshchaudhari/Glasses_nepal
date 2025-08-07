@@ -14,8 +14,12 @@ const ProductList = () => {
   useEffect(() => {
     const dataFetch = async () => {
       try {
-        const res = await axios.get("https://dummyjson.com/products?limit=0");
-        setItems(res.data.products);
+        const res = await axios.get("http://localhost:4080/product/all-product?limit=0",{
+          headers:{
+            Authorization:"Bearer "+localStorage.getItem("token")
+          }
+        });
+        setItems(res.data.allProduct);
         console.log(res.data);
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -57,21 +61,21 @@ const ProductList = () => {
                     <div className="w-full h-[200px] overflow-hidden flex items-center justify-center ">
                       <img
                         src={
-                          item.images && item.images.length > 0
-                            ? item.images[0]
+                          item.imageUrl && item.imageUrl.length > 0
+                            ? item.imageUrl
                             : ""
                         }
-                        alt={item.title}
+                        alt={item.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
                     <div className="p-4">
                       <h3 className="text-center font-bold text-[16px] mb-2">
-                        {item.title}
+                        {item.name}
                       </h3>
-                      {/* <p className="text-justify text-sm text-gray-600">
+                      <p className="text-justify text-sm text-gray-600">
                     {item.description}
-                  </p> */}
+                  </p>
                       <p className="mt-4 font-bold text-[#f85606]">
                         Rs.{item.price}
                       </p>
