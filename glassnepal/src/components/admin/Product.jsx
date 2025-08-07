@@ -48,7 +48,7 @@ const Product = () => {
           Authorization:"Bearer "+localStorage.getItem("token")
         }
       })
-      setProduct(response.data)
+      setProduct(response.data.allProduct)
     }
     catch(err){
       
@@ -60,11 +60,11 @@ const Product = () => {
   return (
     <>
       <Header />
-      <div>
+      <div className="md:ml-[400px] p-5">
         <h1 className="text-center text-[30px] font-bold mt-5">
           Add New Products
         </h1>
-        <div className="flex justify-start p-3 mt-2 w-[800px] m-auto h-full border border-black/20 rounded-lg">
+        <div className="flex justify-start p-3 mt-2 w-full max-w-[400px] md:max-w-[800px] md:m-auto h-full border border-black/20 rounded-lg">
           <form onSubmit={handleSubmit}>
             <label htmlFor="productname" className=" block text-[22px] mb-2 ">
               Product Name
@@ -74,7 +74,7 @@ const Product = () => {
               name="productname"
               id=""
               placeholder="Enter product name"
-              className="block mb-2 p-2 max-w-full w-full border border-black/50 outline-0 rounded-lg "
+              className="block mb-2 p-2 max-w-full w-[450px] md:w-full border border-black/50 outline-0 rounded-lg "
               // value={addProduct}
               onChange={(e) => setName(e.target.value)}
             />
@@ -135,7 +135,7 @@ const Product = () => {
           </form>
         </div>
       </div>
-      <div className="overflow-x-auto mt-5 flex justify-center w-full mb-5">
+      <div className="overflow-x-auto mt-5 flex justify-center  mb-5 ml-[350px] p-5">
         <table className="max-w-full w-[900px] bg-white border border-gray-300 rounded-2xl">
           <thead className="bg-gray-200">
             <tr>
@@ -144,13 +144,30 @@ const Product = () => {
               <th className="text-left py-2 px-4 border-b">Price</th>
               <th className="text-left py-2 px-4 border-b">Image</th>
               <th className="text-left py-2 px-4 border-b">Description</th>
-              <th className="text-left py-2 px-4 border-b">Action</th>
+              <th className="text-left py-2 px-4 border-b col-span-2">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-            </tr>
+            {product.length > 0 ? (
+              product.map((item,index)=>(
+                <tr key={index}>
+                  <td  className="border px-4 py-2">{index+1}</td>
+                  <td  className="border px-4 py-2">{item.name}</td>
+                  <td  className="border px-4 py-2">{item.price}</td>
+                  <td  className="border px-4 py-2 ">
+                    <img src={item.imageUrl} alt="image" className="h-16 w-16 object-cover  " />
+                  </td>
+                  <td className="w-25 mb-5 border px-4 py-2">{item.description}</td>
+                  <td  className="border px-3 text-center">
+                    <button className="bg-green-900 p-2 rounded text-white mr-5 cursor-pointer">Update</button>
+                    <button className="bg-red-900 p-2 rounded text-white mr-5 cursor-pointer">Delete</button>
+                  </td>
+                </tr>
+
+              ))
+            ):(
+              <p className="text-center">Product Not Found</p>
+            ) }
           </tbody>
         </table>
       </div>
