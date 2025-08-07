@@ -50,4 +50,52 @@ catch(err){
 }
 });
 
+// Get All Products
+
+route.get("/all-product",Auth,async(req,res)=>{
+  try{
+    const user = await jwt.verify(req.headers.authorization.split(" ")[1],"jsonkey");
+    console.log(user);
+    const allProduct = await Product.find().sort({createdAt:-1});
+    
+    res.status(200).json({
+      allProduct:allProduct
+    })
+
+  }
+  catch(err){
+    console.log("Somethinng wrong..");
+    res.status(500).json({
+      error:err
+    })
+    
+  }
+})
+
+// delete product
+
+route.delete("/delete/:id",Auth,async(req,res)=>{
+
+  try{
+    const user = await jwt.verify(req.headers.authorization.split(" ")[1],"jsonkey")
+    const data = await Product.find({_id:req.params.id})
+    console.log(data[0]);
+    
+    if(data[0].uId !=user._id){
+      return res.status(401).json({
+        error:"Invalid user...."
+      })
+    }
+
+  }
+  catch(err){
+    console.log("Something Wrong..");
+    res.status(500).json({
+      error:err
+    })
+    
+
+  }
+})
+
 module.exports = route;
