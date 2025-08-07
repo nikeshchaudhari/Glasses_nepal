@@ -87,6 +87,14 @@ route.delete("/delete/:id",Auth,async(req,res)=>{
       })
     }
 
+    await cloudinary.uploader.destroy(data[0].imageId)
+    await Product.findByIdAndDelete(req.params.id)
+
+    res.status(200).json({
+        deleteData:"dataDelete "
+    })
+
+    
   }
   catch(err){
     console.log("Something Wrong..");
