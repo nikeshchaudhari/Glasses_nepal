@@ -10,7 +10,8 @@ const Product = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
 
-  const [product,setProduct]= useState([]);
+  const [product, setProduct] = useState([]);
+  const [deleteItem, setDeleteItem] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Add Product");
@@ -38,25 +39,60 @@ const Product = () => {
     }
   };
 
-  // get all Product 
+  // get all Product
 
- useEffect(()=>{
-   const getProduct =async ()=>{
-    try{
-      const response = await axios.get("http://localhost:4080/product/all-product",{
-        headers:{
-          Authorization:"Bearer "+localStorage.getItem("token")
-        }
-      })
-      setProduct(response.data.allProduct)
-    }
-    catch(err){
-      
-    }
-    
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4080/product/all-product",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        setProduct(response.data.allProduct);
+
+       
+      } catch (err) {}
+    };
+const allData =async()=>{
+  try{
+     const dataGet = await axios.get(
+          "http://localhost:4080/product/all-product",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        setDeleteItem(dataGet.data.allProduct);
   }
-  getProduct();
- },[])
+  catch(err){
+
+  }
+}
+    getProduct();
+    allData();
+  }, []);
+
+  const deleteItems = async (id) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:4080/product/delete/${id}`,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      setDeleteItem((prev) => prev.filter((p) => p._id !== id));
+      toast.success("Product delete Sucesfully !")
+    } catch (err) {
+      toast.error("Error Not delete")
+    }
+  };
   return (
     <>
       <Header />
@@ -142,36 +178,50 @@ const Product = () => {
               <th className="py-2 border">S.N.</th>
               <th className="py-2 border">Product Name</th>
               <th className="py-2 border">Price</th>
-              <th className="py-2 border " >Image</th>
+              <th className="py-2 border ">Image</th>
               <th className="py-2 border">Description</th>
               <th className="py-2 border ">Action</th>
             </tr>
           </thead>
           <tbody>
             {product.length > 0 ? (
-              product.map((item,index)=>(
+              product.map((item, index) => (
                 <tr key={index}>
-                  <td className="border px-1 ">{index+1}</td>
+                  <td className="border px-1 ">{index + 1}</td>
                   <td className="border px-1 ">{item.name}</td>
                   <td className="border px-1 ">{item.price}</td>
                   <td className="border px-1 ">
-                    <img src={item.imageUrl} alt="image" className="h-16 w-16 object-cover  " />
+                    <img
+                      src={item.imageUrl}
+                      alt="image"
+                      className="h-16 w-16 object-cover  "
+                    />
                   </td>
-                  <td className="border md:w-56 md:px-1  ">{item.description}</td>
-                  <td  className="border md:px-1 text-center">
-                    <button className="bg-green-900 p-2 mt-1 mb-1 rounded text-white md:mr-5 cursor-pointer">Update</button>
-                    <button className="bg-red-900 p-2 mb-1 rounded text-white md:mr-5 cursor-pointer">Delete</button>
+                  <td className="border md:w-56 md:px-1  ">
+                    {item.description}
+                  </td>
+                  <td className="border md:px-1 text-center">
+                    <button className="bg-green-900 p-2 mt-1 mb-1 rounded text-white md:mr-5 cursor-pointer">
+                      Update
+                    </button>
+                    <button
+                      className="bg-red-900 p-2 mb-1 rounded text-white md:mr-5 cursor-pointer"
+                      onClick={() => deleteItems(item._id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
-
               ))
-            ):(
+            ) : (
               <tr>
-        <td colSpan="6">
-          <p className="text-center text-red-500 py-5">Product Not Found</p>
-        </td>
-      </tr>
-            ) }
+                <td colSpan="6">
+                  <p className="text-center text-red-500 py-5">
+                    Product Not Found
+                  </p>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
