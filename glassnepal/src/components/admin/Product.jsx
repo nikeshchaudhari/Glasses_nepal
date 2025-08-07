@@ -135,38 +135,42 @@ const Product = () => {
           </form>
         </div>
       </div>
-      <div className="overflow-x-auto mt-8">
-        <table className="  bg-white border border-gray-300 rounded-2xl w-60 md:w-full">
+      <div className="w-full ">
+        <table className=" w-full text-[12px] md:text-[14px]  bg-white border border-gray-300 rounded-2xl md:w-[1000px] md:ml-[300px]">
           <thead className="bg-gray-200 text-sm md:text-base">
-            <tr>
-              <th className="text-left py-2 px-4 border-b">S.N.</th>
-              <th className="text-left py-2 px-4 border-b">Product Name</th>
-              <th className="text-left py-2 px-4 border-b">Price</th>
-              <th className="text-left py-2 px-4 border-b">Image</th>
-              <th className="text-left py-2 px-4 border-b">Description</th>
-              <th className="text-left py-2 px-4 border-b col-span-2">Action</th>
+            <tr className=" ">
+              <th className="py-2 border">S.N.</th>
+              <th className="py-2 border">Product Name</th>
+              <th className="py-2 border">Price</th>
+              <th className="py-2 border " >Image</th>
+              <th className="py-2 border">Description</th>
+              <th className="py-2 border ">Action</th>
             </tr>
           </thead>
           <tbody>
             {product.length > 0 ? (
               product.map((item,index)=>(
                 <tr key={index}>
-                  <td  className="border px-4 py-2">{index+1}</td>
-                  <td  className="border px-4 py-2">{item.name}</td>
-                  <td  className="border px-4 py-2">{item.price}</td>
-                  <td  className="border px-4 py-2 ">
+                  <td className="border px-1 ">{index+1}</td>
+                  <td className="border px-1 ">{item.name}</td>
+                  <td className="border px-1 ">{item.price}</td>
+                  <td className="border px-1 ">
                     <img src={item.imageUrl} alt="image" className="h-16 w-16 object-cover  " />
                   </td>
-                  <td className="w-25 mb-5 border px-4 py-2">{item.description}</td>
-                  <td  className="border px-3 text-center">
-                    <button className="bg-green-900 p-2 rounded text-white mr-5 cursor-pointer">Update</button>
-                    <button className="bg-red-900 p-2 rounded text-white mr-5 cursor-pointer">Delete</button>
+                  <td className="border md:w-56 md:px-2  ">{item.description}</td>
+                  <td  className="border md:px-3 text-center">
+                    <button className="bg-green-900 p-2 rounded text-white md:mr-5 cursor-pointer">Update</button>
+                    <button className="bg-red-900 p-2 rounded text-white md:mr-5 cursor-pointer">Delete</button>
                   </td>
                 </tr>
 
               ))
             ):(
-              <p className="w-full text-center p-5 text-red-500">Product Not Found</p>
+              <tr>
+        <td colSpan="6">
+          <p className="text-center text-red-500 py-5">Product Not Found</p>
+        </td>
+      </tr>
             ) }
           </tbody>
         </table>
