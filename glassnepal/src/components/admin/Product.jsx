@@ -114,7 +114,7 @@ const Product = () => {
         </div>
       </div>
       <div className="overflow-x-auto mt-5 flex justify-center w-full mb-5">
-        <table className="m-w-full bg-white border border-gray-300">
+        <table className="max-w-full w-[900px] bg-white border border-gray-300 rounded-2xl">
           <thead className="bg-gray-200">
             <tr>
               <th className="text-left py-2 px-4 border-b">S.N.</th>
@@ -125,6 +125,11 @@ const Product = () => {
               <th className="text-left py-2 px-4 border-b">Action</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </>
