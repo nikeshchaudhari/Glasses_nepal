@@ -13,10 +13,14 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`https://dummyjson.com/products/${id}`);
+        const res = await axios.get(`http://localhost:4080/product/all-product/${id}`,{
+          headers:{
+            Authorization:"Bearer "+localStorage.getItem("token")
+          }
+        });
         console.log(res.data);
 
-        setItem(res.data);
+        setItem(res.data.findData);
       } catch (err) {
         console.log("Something error", err);
       }
@@ -31,15 +35,15 @@ const ProductDetails = () => {
       </p>
     );
   const handleCart = () => {
-    const cart = localStorage.getItem("cart") || [];
-    const findItem = cart.findIndex((pro) => pro.id === item.id);
+    const cart = localStorage.getItem("token") || [];
+    const findItem = cart.findIndex((pro) => pro._id === item._id);
     if (findItem !== -1) {
       cart[findItem].cartItem += 1;
     } else {
       cart.push({ ...item, cartItem: 1 });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("cart"));
+    window.dispatchEvent(new Event("token"));
     console.log("Add to cart");
   };
 
@@ -49,10 +53,10 @@ const ProductDetails = () => {
       <Navbar />
       <div className="md:flex lg:mt-15 w-full overflow-hidden">
         <div className="flex justify-center w-[400px] md:w-[700px] h-[250px] md:h-[450px] shadow-2xl lg:mx-[50px] sm:mx-[190px] md:mx-[5px] mx-1 mt-10 md:mt-0">
-          <img src={item.images} alt="" className="lg:w-[500px]  " />
+          <img src={item.imageUrl} alt="" className="lg:w-[500px]  " />
         </div>
         <div className="flex flex-col md:justify-start gap-3 md:w-[500px] mx-10 md:mx-5 lg:mx-0 w-[400px] mt-10">
-          <h1 className="text-2xl font-bold">{item.title}</h1>
+          <h1 className="text-2xl font-bold">{item.name}</h1>
 
           <p className="font-bold">Rs. {item.price}</p>
           <p className=" pr-10 ">{item.description}</p>
@@ -83,7 +87,7 @@ const ProductDetails = () => {
                 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
                 // Check if product already exists in cart
-                const alreadyInCart = cart.find((prod) => prod.id === item.id);
+                const alreadyInCart = cart.find((prod) => prod._id === item._id);
 
                 if (!alreadyInCart) {
                   // If not already 
