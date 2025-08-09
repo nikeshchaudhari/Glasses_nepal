@@ -12,6 +12,7 @@ const Product = () => {
 
   const [product, setProduct] = useState([]);
   const [deleteItem, setDeleteItem] = useState([]);
+  const [categories, setCategories] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Add Product");
@@ -53,13 +54,11 @@ const Product = () => {
           }
         );
         setProduct(response.data.allProduct);
-
-       
       } catch (err) {}
     };
-const allData =async()=>{
-  try{
-     const dataGet = await axios.get(
+    const allData = async () => {
+      try {
+        const dataGet = await axios.get(
           "http://localhost:4080/product/all-product",
           {
             headers: {
@@ -68,11 +67,20 @@ const allData =async()=>{
           }
         );
         setDeleteItem(dataGet.data.allProduct);
-  }
-  catch(err){
+      } catch (err) {}
+    };
 
-  }
-}
+    const getCategory = async () => {
+      try {
+        await axios.get("http://localhost:4080/product/category", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        setCategories(data.findCategory)
+      } catch (err) {}
+    };
+    getCategory();
     getProduct();
     allData();
   }, []);
@@ -88,9 +96,9 @@ const allData =async()=>{
         }
       );
       setDeleteItem((prev) => prev.filter((p) => p._id !== id));
-      toast.success("Product delete Sucesfully !")
+      toast.success("Product delete Sucesfully !");
     } catch (err) {
-      toast.error("Error Not delete")
+      toast.error("Error Not delete");
     }
   };
   return (
@@ -132,7 +140,7 @@ const allData =async()=>{
               name="category"
               // required
               className="mb-2 p-2 max-w-full w-195 border border-black/50 outline-0 rounded-lg "
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) => setCategories(e.target.value)}
             >
               <option value="">--Select Category --</option>
               <option value="men">MEN</option>
