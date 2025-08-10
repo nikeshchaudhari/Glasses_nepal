@@ -189,22 +189,21 @@ route.post("/order", Auth, async (req, res) => {
     );
 
     const orderAdd = await new Order({
-      userInfo:req.body.userInfo,
-      products:req.body.products,
-      paymentMethod:req.body.paymentMethod,
-      totalAmount:req.body.totalAmount
-    })
-   const dataSave= await orderAdd.save()
+      userInfo: req.body.userInfo,
+      products: req.body.products,
+      payment: req.body.payment,
+      totalAmount: req.body.totalAmount,
+    });
+    const dataSave = await orderAdd.save();
     res.status(200).json({
-      dataSave:dataSave
-    })
+      message: "Order placed successfully",
+      dataSave,
+    });
   } catch (err) {
     console.log("Somethin is wrong");
     res.status(500).json({
-      error:err
-    })
-    
-
+      error: err,
+    });
   }
 });
 module.exports = route;
