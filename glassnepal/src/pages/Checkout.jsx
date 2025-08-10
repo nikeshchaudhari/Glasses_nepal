@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const [fullName, setFullName] = useState("");
@@ -43,7 +44,20 @@ const Checkout = () => {
           },
         }
       );
-    } catch (err) {}
+      toast.success("Order Sucessfully !")
+  localStorage.removeItem("cart");
+  setFullName(""),
+  setEmail(""),
+  setAddress(""),
+  setPhone(""),
+  setPayment("")
+
+
+    } catch (err) {
+      console.log("Order Failed");
+      toast.error("Failed to order")
+      
+    }
   };
   return (
     <>
