@@ -44,10 +44,10 @@ route.post("/add-user", async (req, res) => {
 route.post("/login", async (req, res) => {
   try {
     // find email
-    const user = await User.findOne({ email: req.body.email });
-    console.log(user);
+    const user = await User.find({ email: req.body.email });
+    console.log(user[0]);
 
-    if (!user) {
+    if (user[0].length==0) {
       return res.status(401).json({
         msg: "User not found",
       });
@@ -55,23 +55,23 @@ route.post("/login", async (req, res) => {
 
     // verify or conform password
 
-    const isMatch = await bcrypt.compare(req.body.password, user.password);
+    const isMatch = await bcrypt.compare(req.body.password, user[0].password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid password" });
     }
    const token = await jwt.sign({
-    uId:user._id,
-    fullName:user.fullName,
-    email:user.email
+    uId:user[0]._id,
+    fullName:user[0].fullName,
+    email:user[0].email
    },"jsonkey",{
     expiresIn:"365d"
    })
    console.log(token);
    
    res.status(200).json({
-    uId :user._id,
-    fullName:user.fullName,
-    email:user.email,
+    uId :user[0]._id,
+    fullName:user[0].fullName,
+    email:user[0].email,
     token:token
    })
   }
@@ -88,7 +88,7 @@ route.post("/login", async (req, res) => {
 route.get("/admin",async(req,res)=>{
   try{
     const admin = await User.countDocuments().select('fullName')
-    console.log(admin);
+    // console.log(admin);
     res.status(200).json({
       admin:admin
     })
@@ -101,5 +101,7 @@ res.status(500).json({
 
   }
 })
+
+
 
 module.exports = route;
