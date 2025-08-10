@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Cart = ({ cartOpen, cartClose }) => {
   const [cartItem, setCartItem] = useState([]);
 
   const cartHandle = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartValid = cart.filter((i) => i && i.images);
+    const cartValid = cart.filter((i) => i && i.imageUrl);
     setCartItem(cartValid);
   };
 
@@ -23,7 +24,7 @@ const Cart = ({ cartOpen, cartClose }) => {
   const updateCart = (id, change) => {
     const update = cartItem
       .map((item) => {
-        if (item.id === id) {
+        if (item._id === id) {
           const currentQty = Number(item.quantity) || 1;
           const newQty = currentQty + change;
           if (newQty <= 0) return null;
@@ -34,11 +35,17 @@ const Cart = ({ cartOpen, cartClose }) => {
         return item;
       })
       .filter(Boolean);
+  // Total 
 
     localStorage.setItem("cart", JSON.stringify(update));
     setCartItem(update);
     window.dispatchEvent(new Event("cart"));
   };
+const totalPrice = cartItem.reduce((sum,item)=>{
+   return sum + item.price*item.quantity
+  },0)
+
+  
   return (
     <>
       <div
@@ -66,40 +73,53 @@ const Cart = ({ cartOpen, cartClose }) => {
             <p className="text-center mt-50">No Cart ADD</p>
           ) : (
             cartItem.map((item) => (
-              <div key={item.id} className="flex mt-2 ml-5">
+              <div key={item._id} className="flex mt-2 ml-5">
                 <div className=" w-20 md:w-25 mx-3 border rounded-lg">
-                  <img src={item.images?.[0]} alt="" className=" md:w-20 " />
+                  <img src={item.imageUrl} alt="" className=" md:w-full " />
                 </div>
                 <div>
                   <h3 className="md:text-[15px] text-[12px] mt-3">
-                    {item.title}
+                    {item.name}
                   </h3>
 
                   <div className="flex gap-5 mt-5 ml-4 w-full items-center  ">
                     <div
                       className="bg-black/35 text-white cursor-pointer p-3"
-                      onClick={() => updateCart(item.id, -1)}
+                      onClick={() => updateCart(item._id, -1)}
                     >
                       <FaMinus />
                     </div>
                     <span className="text-black">{item.quantity}</span>
                     <div
                       className="bg-black/35 text-white cursor-pointer p-3 "
-                      onClick={() => updateCart(item.id, 1)}
+                      onClick={() => updateCart(item._id, 1)}
                     >
                       <FaPlus />
                     </div>
                     <p className=" md:ml-30 ">
-                      Price :{(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}
+                      Price :
+                      {(
+                        Number(item.price || 0) * Number(item.quantity || 1)
+                      ).toFixed(2)}
                     </p>
                   </div>
                 </div>
+             
               </div>
             ))
           )}
         </div>
-        {/*  */}
+          
+        <div className="mt-13 p-2 fixed top-120 bg-white w-full h-full">
+           <hr  className="mt-1 opacity-10"/>
+         <div className="flex justify-between w-220 mt-2">
+          <p className="inline">Total Price</p> 
+         <span>Rs. {totalPrice}</span><br />
+         </div>
+         <Link to="/checkout"><button className="bg-black w-130 p-2 mt-5 hover:bg-black/90 cursor-pointer text-white rounded ">CHECKOUT</button></Link>
       </div>
+      </div>
+      
     </>
   );
 };
