@@ -22,10 +22,17 @@ route.post("/add-product", Auth, async (req, res) => {
     );
     console.log(user);
 
+
+    const category = await Category.findById(req.body.category)
+    if(!category){
+      return res.status(404).json({
+        msg:"Not found category"
+      })
+    }
     const uploadPhoto = await cloudinary.uploader.upload(
       req.files.image.tempFilePath,
       {
-        folder: `products/${req.body.category}`,
+        folder: `products/${category.name}`,
       }
     );
     console.log(uploadPhoto);
