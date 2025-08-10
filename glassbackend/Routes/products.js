@@ -213,4 +213,25 @@ route.post("/order", Auth, async (req, res) => {
     });
   }
 });
+
+// Order Find
+route.get("/all-orders",Auth,async(req,res)=>{
+  try{
+    const user = await jwt.verify(req.headers.authorization.split(" ")[1],"jsonkey")
+    const order = await Order.find().populate("products.prodictId","name price").sort({createdAt:-1})
+
+    res.status(200).json({
+      order:order
+    })
+
+  }
+  catch(err){
+    console.log("Error");
+    res.status(500).json({
+      error:err
+    })
+    
+
+  }
+})
 module.exports = route;
