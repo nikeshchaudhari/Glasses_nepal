@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
-  const[cart,setCart]=useState([])
+  // const [cart, setCart] = useState([]);
   useEffect(() => {
     const getOrder = async () => {
       try {
@@ -19,20 +19,21 @@ const Order = () => {
         setOrder(res.data.order);
       } catch (err) {
         console.log("Error");
-        
       }
 
-      try{
-const storeCart = await JSON.parse(localStorage.getItem("cart")||[])
-setCart(storeCart)
-      }
-      catch(err){
-console.log("error");
-
-      }
+      // try {
+      //   const storeCart = await JSON.parse(localStorage.getItem("cart") || []);
+      //   setCart(storeCart);
+      // } catch (err) {
+      //   console.log("error");
+      // }
     };
     getOrder();
-  },[]);
+  }, []);
+
+  const totalAmount = cart.reduce((sum,item)=>{
+    return sum+(item.price*item.quantity)
+  },0 )
   return (
     <>
       <Header />
@@ -57,12 +58,14 @@ console.log("error");
               <tr key={order._id}>
                 <td className="border p-2">{order.userInfo.fullName}</td>
                 <td className="border p-2">{order.userInfo.email}</td>
-                <td className="border p-2">{order.products.map(p=>(
-                  p.name
-                )).join(" , ")}</td>
-                <td  className="border p-2">{order.payment}</td>
-                <td  className="border p-2">Rs.{order.totalAmount}</td>
-                <td  className="border p-2">{order.status}</td>
+                <td className="border p-2">
+                  {order.products.map((p) => p.name).join(" , ")}
+                </td>
+                <td className="border p-2">{order.payment}</td>
+                <td className="border p-2">Rs.{order.products.reduce((sum,item)=>{
+                  return sum+(item.price*item.quantity)
+                },0)}</td>
+                <td className="border p-2">{order.status}</td>
               </tr>
             ))}
           </tbody>
