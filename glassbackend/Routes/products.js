@@ -22,12 +22,11 @@ route.post("/add-product", Auth, async (req, res) => {
     );
     console.log(user);
 
-
-    const category = await Category.findById(req.body.category)
-    if(!category){
+    const category = await Category.findById(req.body.category);
+    if (!category) {
       return res.status(404).json({
-        msg:"Not found category"
-      })
+        msg: "Not found category",
+      });
     }
     const uploadPhoto = await cloudinary.uploader.upload(
       req.files.image.tempFilePath,
@@ -199,7 +198,7 @@ route.post("/order", Auth, async (req, res) => {
       userInfo: req.body.userInfo,
       products: req.body.products,
       payment: req.body.payment,
-      totalAmount: req.body.totalAmount,
+      // totalAmount:req.body.totalAmount,
     });
     const dataSave = await orderAdd.save();
     res.status(200).json({
@@ -215,23 +214,64 @@ route.post("/order", Auth, async (req, res) => {
 });
 
 // Order Find
-route.get("/all-orders",Auth,async(req,res)=>{
-  try{
-    const user = await jwt.verify(req.headers.authorization.split(" ")[1],"jsonkey")
-    const order = await Order.find().populate("products.productId","name price").sort({createdAt:-1})
+route.get("/all-orders", Auth, async (req, res) => {
+  try {
+    const user = await jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      "jsonkey"
+    );
+    const order = await Order.find()
+      .populate("products.productId", "name price")
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
-      order:order
-    })
-
-  }
-  catch(err){
+      order: order,
+    });
+  } catch (err) {
     console.log("Error");
     res.status(500).json({
-      error:err
-    })
-    
-
+      error: err,
+    });
   }
-})
+
+  // statusUpdate
+
+  route.put("/order/:id/status", Auth, async (req, res) => {
+    try {
+      const user = await jwt.verify(
+        req.headers.authorization.split(" ")[1],
+        "jsonkey"
+      );
+      console.log(user);
+
+      const orderId = req.params.id;
+      const status = req.body.status;
+
+      const updateStatus = await Order.findByIdAndUpdate(
+        orderId,
+        {
+          status
+        },
+        {
+          new: true,
+        }
+      );
+      console.log(updateStatus);
+
+      if (!updateStatus) {
+        return res.status(404).json({ msg: "Order not found" });
+      }
+
+      res.status(200).json({
+        msg: "sucessfully Update!",
+        order: updateStatus,
+      });
+    } catch (err) {
+      console.log("ERROR");
+      res.status(500).json({
+        error: err,
+      });
+    }
+  });
+});
 module.exports = route;
