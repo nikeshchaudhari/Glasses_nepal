@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
-  // const [cart, setCart] = useState([]);
+  // const { orderId } = useParams();
+  const [status, setStatus] = useState("pending");
   useEffect(() => {
     const getOrder = async () => {
       try {
@@ -20,20 +22,30 @@ const Order = () => {
       } catch (err) {
         console.log("Error");
       }
-
-      // try {
-      //   const storeCart = await JSON.parse(localStorage.getItem("cart") || []);
-      //   setCart(storeCart);
-      // } catch (err) {
-      //   console.log("error");
-      // }
     };
     getOrder();
   }, []);
 
-  const totalAmount = cart.reduce((sum,item)=>{
-    return sum+(item.price*item.quantity)
-  },0 )
+  const changeStatus = async (orderId,newStatus) => {
+    // setStatus(newStatus);
+    try {
+      const res = await axios.put(`http://localhost:4080/status/order/${orderId}/status`,{
+        status:newStatus
+      },{
+        headers:{
+          Authorization:"Bearer "+localStorage.getItem("token")
+        }
+      });
+
+
+      setOrder((prev)=>
+      prev.map((order)=>(
+       order._id===orderId ?{...order,newStatus}:order
+       ) ));
+    } catch (err) {
+      onsole.error("Failed to update status", err);
+    }
+  };
   return (
     <>
       <Header />
@@ -62,10 +74,29 @@ const Order = () => {
                   {order.products.map((p) => p.name).join(" , ")}
                 </td>
                 <td className="border p-2">{order.payment}</td>
-                <td className="border p-2">Rs.{order.products.reduce((sum,item)=>{
-                  return sum+(item.price*item.quantity)
-                },0)}</td>
+                <td className="border p-2">
+                  Rs.
+                  {order.products.reduce((sum, item) => {
+                    return sum + item.price * item.quantity;
+                  }, 0)}
+                </td>
                 <td className="border p-2">{order.status}</td>
+                <td className="border p-2">
+                  <select
+                    name=""
+                    id=""
+                    className="border p-2 rounded bg-slate-500 text-white cursor-pointer"
+                    onChange={(e)=>changeStatus(order._id, e.target.value)}
+                  >
+                    <option value="">--select option--</option>
+                    <option value="pending" className="cursor-pointer">
+                      Pending
+                    </option>
+                    <option value="processing">Processing</option>
+                    <option value="confirm">Confirm</option>
+                    <option value="delivery">Delivered</option>
+                  </select>
+                </td>
               </tr>
             ))}
           </tbody>
