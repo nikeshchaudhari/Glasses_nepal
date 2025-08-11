@@ -4,6 +4,7 @@ import axios from "axios";
 
 const Order = () => {
   const [order, setOrder] = useState([]);
+  const[cart,setCart]=useState([])
   useEffect(() => {
     const getOrder = async () => {
       try {
@@ -19,6 +20,15 @@ const Order = () => {
       } catch (err) {
         console.log("Error");
         
+      }
+
+      try{
+const storeCart = await JSON.parse(localStorage.getItem("cart")||[])
+setCart(storeCart)
+      }
+      catch(err){
+console.log("error");
+
       }
     };
     getOrder();
