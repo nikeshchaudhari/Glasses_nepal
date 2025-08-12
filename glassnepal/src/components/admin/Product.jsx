@@ -12,7 +12,7 @@ const Product = () => {
 
   const [product, setProduct] = useState([]);
   const [deleteItem, setDeleteItem] = useState([]);
-  const [categories, setCategories] = useState("");
+  const [categories, setCategories] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Add Product");
@@ -72,12 +72,12 @@ const Product = () => {
 
     const getCategory = async () => {
       try {
-        await axios.get("http://localhost:4080/product/category", {
+        const res = await axios.get("http://localhost:4080/product/category", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
         });
-        setCategories(data.findCategory)
+        setCategories(res.data.category);
       } catch (err) {}
     };
     getCategory();
@@ -139,24 +139,27 @@ const Product = () => {
             <select
               name="category"
               // required
-              className="mb-2 p-2 max-w-full w-195 border border-black/50 outline-0 rounded-lg "
-              onChange={(e) => setCategories(e.target.value)}
+              className="mb-2 p-2 max-w-full w-195 border border-black/50 outline-0 rounded-lg cursor-pointer "
+              onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">--Select Category --</option>
-              <option value="men">MEN</option>
-              <option value="women">WOMEN</option>
-              <option value="sunglass">SUNGLASS</option>
-              <option value="sportglass">SPORTGLASS</option>
+              {categories.map((cate) =>(
+                
+                <option key={cate._id} value={cate._id}>
+                  {cate.name}
+                </option>
+              
+              ))}
             </select>
             <label htmlFor="photo" className=" block text-[22px] mb-2 ">
               Product Photo
             </label>
             <input
               type="file"
-              name="productname"
+              name="file"
               id=""
-              placeholder="Enter short description"
-              className="mb-2 p-2 max-w-full w-full border border-black/50 outline-0 rounded-lg "
+              placeholder=""
+              className="mb-2 p-2 max-w-full w-full border border-black/50 outline-0 rounded-lg cursor-pointer"
               onChange={(e) => setImage(e.target.files[0])}
             />
             <label htmlFor="productname" className=" block text-[22px] mb-2 ">
@@ -194,7 +197,7 @@ const Product = () => {
           <tbody>
             {product.length > 0 ? (
               product.map((item, index) => (
-                <tr key={index}>
+                <tr key={index} className="even:bg-gray-200 odd:bg-white">
                   <td className="border px-1 ">{index + 1}</td>
                   <td className="border px-1 ">{item.name}</td>
                   <td className="border px-1 ">{item.price}</td>
