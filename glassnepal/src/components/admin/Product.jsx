@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "./Header";
 import axios from "axios";
 import { toast } from "react-toastify";
-
 const Product = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -13,6 +12,7 @@ const Product = () => {
   const [product, setProduct] = useState([]);
   const [deleteItem, setDeleteItem] = useState([]);
   const [categories, setCategories] = useState([]);
+  const fileRef = useRef();
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("Add Product");
@@ -38,6 +38,13 @@ const Product = () => {
     } catch (err) {
       toast.error("Error");
     }
+
+    setName(""), 
+    setPrice(""),
+    setCategory(""),
+    setImage(null),
+    fileRef.current.value="",
+    setDescription("");
   };
 
   // get all Product
@@ -119,7 +126,7 @@ const Product = () => {
               id=""
               placeholder="Enter product name"
               className="block mb-2 p-2 max-w-full w-full md:w-full border border-black/50 outline-0 rounded-lg "
-              // value={addProduct}
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <label htmlFor="productname" className=" block text-[22px] mb-2 ">
@@ -131,6 +138,7 @@ const Product = () => {
               id=""
               placeholder="Enter Price"
               className="block mb-2 p-2 max-w-full w-full border border-black/50 outline-0 rounded-lg "
+              value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
             <label htmlFor="productname" className=" block text-[22px] mb-2 ">
@@ -140,15 +148,14 @@ const Product = () => {
               name="category"
               // required
               className="mb-2 p-2 max-w-full w-195 border border-black/50 outline-0 rounded-lg cursor-pointer "
+              value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">--Select Category --</option>
-              {categories.map((cate) =>(
-                
+              {categories.map((cate) => (
                 <option key={cate._id} value={cate._id}>
                   {cate.name}
                 </option>
-              
               ))}
             </select>
             <label htmlFor="photo" className=" block text-[22px] mb-2 ">
@@ -159,6 +166,7 @@ const Product = () => {
               name="file"
               id=""
               placeholder=""
+              ref={fileRef}
               className="mb-2 p-2 max-w-full w-full border border-black/50 outline-0 rounded-lg cursor-pointer"
               onChange={(e) => setImage(e.target.files[0])}
             />
@@ -171,6 +179,7 @@ const Product = () => {
               id=""
               placeholder="Enter short description"
               className="block mb-2 p-2 w-full border border-black/50 outline-0 rounded-lg "
+              value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             <button
