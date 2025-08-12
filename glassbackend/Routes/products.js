@@ -234,11 +234,9 @@ route.get("/all-orders", Auth, async (req, res) => {
     });
   }
 
-  // category findProduct
-
-
+  
 });
-
+// category findProduct
 route.get("/category/:id", Auth, async (req, res) => {
   try {
     const user = await jwt.verify(
@@ -250,7 +248,7 @@ route.get("/category/:id", Auth, async (req, res) => {
  const products= await Product.find({category:category._id})
 
  res.status(200).json({
-    products:products
+    categoryProduct:products
 
  }
  )
