@@ -234,44 +234,32 @@ route.get("/all-orders", Auth, async (req, res) => {
     });
   }
 
-  // statusUpdate
+  // category findProduct
 
-  route.put("/order/:id/status", Auth, async (req, res) => {
-    try {
-      const user = await jwt.verify(
-        req.headers.authorization.split(" ")[1],
-        "jsonkey"
-      );
-      console.log(user);
 
-      const orderId = req.params.id;
-      const status = req.body.status;
-
-      const updateStatus = await Order.findByIdAndUpdate(
-        orderId,
-        {
-          status
-        },
-        {
-          new: true,
-        }
-      );
-      console.log(updateStatus);
-
-      if (!updateStatus) {
-        return res.status(404).json({ msg: "Order not found" });
-      }
-
-      res.status(200).json({
-        msg: "sucessfully Update!",
-        order: updateStatus,
-      });
-    } catch (err) {
-      console.log("ERROR");
-      res.status(500).json({
-        error: err,
-      });
-    }
-  });
 });
+
+route.get("/category/:id", Auth, async (req, res) => {
+  try {
+    const user = await jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      "jsonkey"
+    );
+
+ const category = await Category.findById(req.params.id)
+ const products= await Product.find({category:category._id})
+
+ res.status(200).json({
+    products:products
+
+ }
+ )
+  } catch (err) {
+    console.log("Error:", err);
+    res.status(500).json({
+      error: err,
+    });
+  }
+});
+
 module.exports = route;
