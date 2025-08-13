@@ -233,8 +233,6 @@ route.get("/all-orders", Auth, async (req, res) => {
       error: err,
     });
   }
-
-  
 });
 // category findProduct
 route.get("/category/:id", Auth, async (req, res) => {
@@ -244,19 +242,42 @@ route.get("/category/:id", Auth, async (req, res) => {
       "jsonkey"
     );
 
- const category = await Category.findById(req.params.id)
- const products= await Product.find({category:category._id})
+    const category = await Category.findById(req.params.id);
+    const products = await Product.find({ category: category._id });
 
- res.status(200).json({
-    categoryProduct:products
-
- }
- )
+    res.status(200).json({
+      categoryProduct: products,
+    });
   } catch (err) {
     console.log("Error:", err);
     res.status(500).json({
       error: err,
     });
+  }
+});
+
+// search product
+
+route.get("/search", Auth, async (req, res) => {
+  const {query} = req.query;
+  try {
+    const user = await jwt.verify(
+      req.headers.authorization.split(" ")[1],
+      "jsonkey"
+    );
+
+    const searchProduct = await Product.find({
+      name: { $regex: query, $options: "i" },
+    });
+    res.status(200).json({
+      product:searchProduct
+    });
+  } catch (err) {
+    console.log("Error");
+    res.status(500).json({
+      error:err
+    })
+    
   }
 });
 
