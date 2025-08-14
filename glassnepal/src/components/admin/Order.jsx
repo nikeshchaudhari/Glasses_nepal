@@ -53,9 +53,9 @@ const Order = () => {
         <h1 className="text-center text-[24px] md:text-[30px] font-bold mt-5 mx-auto">
           User Order
         </h1>
-        <table className="w-[50vw] border border-gray-300">
+        <table className="w-[50vw] ">
           <thead>
-            <tr>
+            <tr className="bg-slate-400 text-white border">
               <th className="border p-2">Customer Name</th>
               <th className="border p-2">Email</th>
               <th className="border p-2">Product Name</th>
@@ -67,7 +67,7 @@ const Order = () => {
           </thead>
           <tbody>
             {order.map((order) => (
-              <tr key={order._id}>
+              <tr key={order._id} className="even:bg-gray-300 odd:bg-white">
                 <td className="border p-2">{order.userInfo.fullName}</td>
                 <td className="border p-2">{order.userInfo.email}</td>
                 <td className="border p-2">
@@ -85,7 +85,7 @@ const Order = () => {
                   <select
                     name=""
                     id=""
-                    className="border p-2 rounded bg-slate-500 text-white cursor-pointer"
+                    className="border p-2 rounded bg-slate-700 text-white cursor-pointer"
                     onChange={(e)=>changeStatus(order._id, e.target.value)}
                   >
                     <option value="">--select option--</option>

@@ -55,11 +55,7 @@ const MainHeader = () => {
           </div>
         )}
         <div>
-          <img
-            src="https://cdn2.blanxer.com/brand_logo/63e45741f1328721d34d41e8/660043f51786c9bc24ea2fb0.webp"
-            alt="image"
-            className="md:w-[250px] w-[150px] "
-          />
+         <h1 className="md:w-[250px]   text-[30px] font-semibold  rounded-lg p-2 text-black">GLASSES NEPAL</h1>
         </div>
         <div className="flex gap-5 relative">
           <LocalMallOutlinedIcon className="cursor-pointer" onClick={()=>setCartOpen(true)}/>

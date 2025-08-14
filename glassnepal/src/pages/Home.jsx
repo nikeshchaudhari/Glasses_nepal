@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Carasole from "../components/Carasole";
 import SearchInput from "../components/SearchInput";
 import ShopCategories from "../components/ShopCategories";
+import Footer from "./Footer";
 
 const Home = () => {
   return (

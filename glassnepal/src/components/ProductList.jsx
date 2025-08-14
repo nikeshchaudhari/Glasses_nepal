@@ -55,7 +55,7 @@ const ProductList = () => {
                 <div
                   key={index}
                   className="w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-4"
-                  onClick={() => navigate(`/product/${item.id}`)}
+                  onClick={() => navigate(`/product/${item._id}`)}
                 >
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full transform hover:-translate-y-2 cursor-pointer transition duration-500">
                     <div className="w-full h-[200px] overflow-hidden flex items-center justify-center ">
@@ -73,9 +73,9 @@ const ProductList = () => {
                       <h3 className="text-center font-bold text-[16px] mb-2">
                         {item.name}
                       </h3>
-                      <p className="text-justify text-sm text-gray-600">
+                      {/* <p className="text-justify text-sm text-gray-600">
                     {item.description}
-                  </p>
+                  </p> */}
                       <p className="mt-4 font-bold text-[#f85606]">
                         Rs.{item.price}
                       </p>

@@ -7,7 +7,7 @@ import img from "../../assets/5.jpg";
 const Header = () => {
   return (
     <div>
-        <div className="md:w-[79vw] w-[100vw]  bg-slate-700 h-12 overflow-x-hidden">
+        <div className="md:w-[100vw] w-screen bg-slate-800 md:h-12 overflow-auto ">
                 <div className="flex justify-between items-center  ">
                     {/* Mobile view */}
               <div>

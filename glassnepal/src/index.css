@@ -6,4 +6,7 @@
   font-optical-sizing: auto;
   /* font-weight: <weight>; */
   font-variation-settings: "wdth" 100;
+  /* margin: 0px;
+  padding: 0px; */
+  box-sizing: border-box;
 }

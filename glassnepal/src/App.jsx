@@ -16,6 +16,8 @@ import MainHome from "./components/admin/MainHome";
 import Product from "./components/admin/Product";
 import Checkout from "./pages/Checkout";
 import Categorys from "./categories/Categorys";
+import SearchPage from "./pages/SearchPage";
+import Footer from "./pages/Footer";
 
 
 const myroute = createBrowserRouter([
@@ -27,6 +29,7 @@ const myroute = createBrowserRouter([
   // {path:"categories/women",Component:Women},
   // {path:"categories/sunglass",Component:Sunglass},
   // {path:"categories/sportglass",Component:SportGlass},
+  {path:"/search",Component:SearchPage},
   {path:"about-us",Component:About},
   {path:"admin",Component:Admin},
   {path:"checkout",Component:Checkout},
@@ -45,7 +48,7 @@ const App = () => {
     <>
    <RouterProvider router={myroute}/>
          <ToastContainer />
-
+<Footer/>
     </>
   );
 };

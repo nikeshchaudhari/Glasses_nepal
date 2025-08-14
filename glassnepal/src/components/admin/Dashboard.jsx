@@ -5,14 +5,15 @@ import SideNav from "./SideNav";
 const Dashboard = () => {
   return (
     <>
-      <div className=" w-full min-h-screen overflow-x-hidden ">
-        <div className="flex w-[100vw] bg-white justify-start">
+      <div className=" flex min-h-screen overflow-hidden ">
+        <div className="fixed h-screen w-[250px]">
           <SideNav />
+           </div>
           <div className="main">
-            <div className="top-container">
+            <div>
 
                 <Outlet/>
-            </div>
+           
           </div>
         </div>
       </div>
